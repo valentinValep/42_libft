@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/10/21 02:30:36 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/08 21:38:06 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,33 @@ void	test_ft_strlen()
 	i = 0;
 	while (i < 4)
 	{
-		printf("ft_strlen(%s) == strlen(%s) -> %d, %d\n", inputs[i], inputs[i], ft_strlen(inputs[i]), strlen(inputs[i]));
+		printf("ft_strlen(%s) == strlen(%s) -> %ld, %ld\n", inputs[i], inputs[i], ft_strlen(inputs[i]), strlen(inputs[i]));
 		assert(ft_strlen(inputs[i]) == strlen(inputs[i]));
 		i++;
+	}
+}
+
+void	uni_test_memset(int c)
+{
+	char	str[] = "ZIZI";
+	char	str2[] = "ZIZI";
+	char	*new = memset(str, c, 4);
+	char	*new2 = ft_memset(str2, c, 4);
+	for (int i = 0; i < 5; i++)
+		assert(str[i] == str2[i]);
+	for (int i = 0; i < 5; i++)
+		assert(new[i] == new2[i]);
+}
+
+//void	*ft_memset(void *pointer, int value, size_t count);
+void	test_ft_memset()
+{
+	int	inputs[] = {0, 'z', 128, -1, -128, -129, 3273};
+
+	for (int i = 0; i < 7; i++)
+	{
+		printf("uni_test_memset(%d)\n", inputs[i]);
+		uni_test_memset(inputs[i]);
 	}
 }
 
@@ -139,14 +163,69 @@ int	main(void)
 	test_ft_isprint();
 	printf("===== TESTS ft_isprint(int c) completed.\n\n");
 
-	printf("===== TESTING ft_atoi(int c)..\n");
-	test_ft_atoi();
-	printf("===== TESTS ft_atoi(int c) completed.\n\n");
-
 	printf("===== TESTING ft_strlen(int c)..\n");
 	test_ft_strlen();
 	printf("===== TESTS ft_strlen(int c) completed.\n\n");
 
+	printf("===== TESTING ft_memset(void *pointer, int value, size_t count)..\n");
+	test_ft_memset();
+	printf("===== TESTS ft_memset(void *pointer, int value, size_t count) completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING @TODO..\n");
+	//test_ft_strlen();
+	printf("===== TESTS @TODO completed.\n\n");
+
+	printf("===== TESTING ft_atoi(int c)..\n");
+	test_ft_atoi();
+	printf("===== TESTS ft_atoi(int c) completed.\n\n");
 
 	printf("all TESTS completed.");
 }

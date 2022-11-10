@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2022/11/10 01:17:58 by vlepille         ###   ########.fr        #
+#    Updated: 2022/11/10 05:17:04 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,19 +39,19 @@ SRC = src/ft_isalnum.c \
 	src/ft_memcmp.c \
 	src/ft_strnstr.c \
 	src/ft_atoi.c \
-	#src/ft_calloc.c \
-	#src/ft_strdup.c \
-	#src/ft_substr.c \
-	#src/ft_strjoin.c \
-	#src/ft_strtrim.c \
-	#src/ft_split.c \
-	#src/ft_itoa.c \
-	#src/ft_strmapi.c \
-	#src/ft_striteri.c \
-	#src/ft_putchar_fd.c \
-	#src/ft_putstr_fd.c \
-	#src/ft_putendl_fd.c \
-	#src/ft_putnbr_fd.c
+	src/ft_calloc.c \
+	src/ft_strdup.c \
+	src/ft_substr.c \
+	src/ft_strjoin.c \
+	src/ft_strtrim.c \
+	src/ft_split.c \
+	src/ft_itoa.c \
+	src/ft_strmapi.c \
+	src/ft_striteri.c \
+	src/ft_putchar_fd.c \
+	src/ft_putstr_fd.c \
+	src/ft_putendl_fd.c \
+	src/ft_putnbr_fd.c
 
 #BONUS_SRC = src/ft_lstnew.c \
 #	src/ft_lstadd_front.c \
@@ -84,19 +84,19 @@ OBJ = bin/ft_isalnum.o \
 	bin/ft_memcmp.o \
 	bin/ft_strnstr.o \
 	bin/ft_atoi.o \
-	#bin/ft_calloc.o \
-	#bin/ft_strdup.o \
-	#bin/ft_substr.o \
-	#bin/ft_strjoin.o \
-	#bin/ft_strtrim.o \
-	#bin/ft_split.o \
-	#bin/ft_itoa.o \
-	#bin/ft_strmapi.o \
-	#bin/ft_striteri.o \
-	#bin/ft_putchar_fd.o \
-	#bin/ft_putstr_fd.o \
-	#bin/ft_putendl_fd.o \
-	#bin/ft_putnbr_fd.o
+	bin/ft_calloc.o \
+	bin/ft_strdup.o \
+	bin/ft_substr.o \
+	bin/ft_strjoin.o \
+	bin/ft_strtrim.o \
+	bin/ft_split.o \
+	bin/ft_itoa.o \
+	bin/ft_strmapi.o \
+	bin/ft_striteri.o \
+	bin/ft_putchar_fd.o \
+	bin/ft_putstr_fd.o \
+	bin/ft_putendl_fd.o \
+	bin/ft_putnbr_fd.o
 
 #BONUS_OBJ = bin/ft_lstnew.o \
 #	bin/ft_lstadd_front.o \

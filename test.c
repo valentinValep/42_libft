@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/10 04:34:34 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/10 08:51:21 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 void	test_ft_isalnum(void)
 {
@@ -131,8 +134,11 @@ void	uni_test_bzero(size_t n)
 {
 	char	str[] = "ZIZI";
 	char	str2[] = "ZIZI";
+
 	bzero(str, n);
 	ft_bzero(str2, n);
+	printf(" -> need {%d, %d, %d, %d, %d}", str[0], str[1], str[2], str[3], str[4]);
+	printf(" | get {%d, %d, %d, %d, %d}\n", str2[0], str2[1], str2[2], str2[3], str2[4]);
 	for (int i = 0; i < 5; i++)
 		assert(str[i] == str2[i]);
 }
@@ -144,7 +150,7 @@ void	test_ft_bzero(void)
 
 	for (int i = 0; i < 3; i++)
 	{
-		printf("uni_test_bzero(%d)\n", inputs[i]);
+		printf("uni_test_bzero(%d)", inputs[i]);
 		uni_test_bzero(inputs[i]);
 	}
 }
@@ -507,62 +513,423 @@ void	test_ft_atoi(void)
 	}
 }
 
+#include <malloc.h>
 //void	*ft_calloc(size_t nmemb, size_t size);
 void	test_ft_calloc(void)
 {
-	const char	*ft_res = ft_calloc(5, 1);
-	const char	*res = calloc(5, 1);
-	const char	*ft_res2 = ft_calloc(0, 1);
-	const char	*res2 = calloc(0, 1);
-	const char	*ft_res3 = ft_calloc(5, 0);
-	const char	*res3 = calloc(5, 0);
+	char	*ft_res = ft_calloc(5, 1);
+	char	*res = calloc(5, 1);
+	char	*ft_res2 = ft_calloc(0, 1);
+	char	*res2 = calloc(0, 1);
+	char	*ft_res3 = ft_calloc(5, 0);
+	char	*res3 = calloc(5, 0);
+	char	*ft_res4 = ft_calloc(__INT_MAX__, __INT_MAX__);
+	char	*res4 = calloc(__INT_MAX__, __INT_MAX__);
+	char	*tmp;
 
 	// if NULL : problem, retry
 	assert(ft_res && res);
-	printf("Memory set to zero test");
+	printf("Testing ft_calloc(0, 1)\n");
+	tmp = malloc(0);
+	assert(malloc_usable_size(ft_res2) == malloc_usable_size(tmp) && \
+		malloc_usable_size(res2) == malloc_usable_size(tmp));
+	free(tmp);
+	printf("Testing ft_calloc(5, 0)\n");
+	tmp = malloc(0);
+	assert(malloc_usable_size(ft_res3) == malloc_usable_size(tmp) && \
+		malloc_usable_size(res3) == malloc_usable_size(tmp));
+	free(tmp);
+	printf("Memory set to zero test processing..\n");
 	for (int i = 0; i < 5; i++)
 		assert(!ft_res[i] && !res[i]);
-	printf("ft_calloc(0, 1) == NULL");
-	assert(!ft_res2 && !res2);
-	printf("ft_calloc(5, 0) == NULL");
-	assert(!ft_res3 && !res3);
+	printf("Memory set to zero test finished\n");
+	printf("Memory size check processing..\n");
+	tmp = malloc(5);
+	assert(malloc_usable_size(ft_res) == malloc_usable_size(tmp) && \
+		malloc_usable_size(res) == malloc_usable_size(tmp));
+	free(tmp);
+	printf("Memory size check finished\n");
+	printf("Integer overflow check processing..\n");
+	printf("ft_calloc(2147483648, 1) == %p\n", ft_res4);
+	printf("calloc(536870912, 4) == %p\n", res4);
+	assert(!ft_res4 && !res4);
+	printf("Integer overflow check processing..\n");
+	free(ft_res);
+	free(res);
+	free(ft_res2);
+	free(res2);
+	free(ft_res3);
+	free(res3);
 }
 
 //char	*ft_strdup(const char *s);
-void	test_ft_strdup(void);
+void	test_ft_strdup(void)
+{
+	char	*res = strdup("abcd");
+	char	*ft_res = ft_strdup("abcd");
+
+	assert(ft_res && res);
+	printf("strcmp(strdup(\"abcd\"), ft_strdup(\"abcd\"))\n");
+	assert(!strcmp(res, ft_res) && !strcmp(res, "abcd") && !strcmp(ft_res, "abcd"));
+	assert(malloc_usable_size(res) == malloc_usable_size(ft_res));
+	free(res);
+	free(ft_res);
+
+	res = strdup("");
+	ft_res = ft_strdup("");
+
+	assert(ft_res && res);
+	printf("strcmp(strdup(\"\"), ft_strdup(\"\"))\n");
+	assert(!strcmp(res, ft_res) && !strcmp(res, "") && !strcmp(ft_res, ""));
+	assert(malloc_usable_size(res) == malloc_usable_size(ft_res));
+	free(res);
+	free(ft_res);
+}
+
+void	verif_malloc_size(void *p, size_t size)
+{
+	printf("Verif malloc size : \"%s\" <-> %ld\n", (char *) p, size);
+	char *tmp = malloc(size);
+	assert(tmp);
+	assert(malloc_usable_size(tmp) == malloc_usable_size(p));
+	free(tmp);
+}
 
 //char	*ft_substr(char const *s, unsigned int start, size_t len);
-void	test_ft_substr(void);
+void	test_ft_substr(void)
+{
+	char	*res = ft_substr("abcdefghijklmnoparstuvwxyz", 4, 5);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 4, 5) == \"%s\"\n", res);
+	assert(!strcmp(res, "efghi"));
+	verif_malloc_size(res, 6);
+	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 30, 5);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 30, 5) == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 30, 30);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 30, 30) == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 23, 30);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 23, 30) == \"%s\"\n", res);
+	assert(!strcmp(res, "xyz"));
+	verif_malloc_size(res, 4);
+	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 0, 30);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 0, 30) == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijklmnoparstuvwxyz"));
+	verif_malloc_size(res, 27);
+	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 5, 0);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 5, 0) == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+}
 
 //char	*ft_strjoin(char const *s1, char const *s2);
-void	test_ft_strjoin(void);
+void	test_ft_strjoin(void)
+{
+	char	*res = ft_strjoin("abcdefghijkl", "mnoparstuvwxyz");
+	assert(res);
+	printf("ft_strjoin(\"abcdefghijkl\", \"mnoparstuvwxyz\") == \"abcdefghijklmnoparstuvwxyz\"\n");
+	assert(!strcmp(res, "abcdefghijklmnoparstuvwxyz"));
+	verif_malloc_size(res, 27);
+	free(res);
+
+	res = ft_strjoin("abcdefghijkl", "");
+	assert(res);
+	printf("ft_strjoin(\"abcdefghijkl\", \"\") == \"abcdefghijkl\"\n");
+	assert(!strcmp(res, "abcdefghijkl"));
+	verif_malloc_size(res, 13);
+	free(res);
+
+	res = ft_strjoin("", "mnoparstuvwxyz");
+	assert(res);
+	printf("ft_strjoin(\"\", \"mnoparstuvwxyz\") == \"mnoparstuvwxyz\"\n");
+	assert(!strcmp(res, "mnoparstuvwxyz"));
+	verif_malloc_size(res, 15);
+	free(res);
+
+	res = ft_strjoin("", "");
+	assert(res);
+	printf("ft_strjoin(\"\", \"\") == \"\"\n");
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+}
 
 //char	*ft_strtrim(char const *s1, char const *set);
-void	test_ft_strtrim(void);
+void	test_ft_strtrim(void)
+{
+	char	*res;
+
+	res = ft_strtrim("abcdefghijkl", "l");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkl\", \"l\") == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijk"));
+	verif_malloc_size(res, 12);
+	free(res);
+
+	res = ft_strtrim("abcdefghijkll", "l");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkll\", \"l\") == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijk"));
+	verif_malloc_size(res, 12);
+	free(res);
+
+	res = ft_strtrim("abcdefghijkll", "lacb");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkll\", \"lacb\") == \"%s\"\n", res);
+	assert(!strcmp(res, "defghijk"));
+	verif_malloc_size(res, 9);
+	free(res);
+
+	res = ft_strtrim("abcdefghijkll", "a");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkll\", \"a\") == \"%s\"\n", res);
+	assert(!strcmp(res, "bcdefghijkll"));
+	verif_malloc_size(res, 13);
+	free(res);
+
+	res = ft_strtrim("abcdefghijkll", "");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkll\", \"\") == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijkll"));
+	verif_malloc_size(res, 14);
+	free(res);
+
+	res = ft_strtrim("abcdefghijkll", "gijglh");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkll\", \"gijglh\") == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijk"));
+	verif_malloc_size(res, 12);
+	free(res);
+
+	res = ft_strtrim("abcdefghijkll", "hajlulr");
+	assert(res);
+	printf("ft_strtrim(\"abcdefghijkll\", \"gijglh\") == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijk"));
+	verif_malloc_size(res, 12);
+	free(res);
+
+	res = ft_strtrim("aalaallaallaaal", "admkds l");
+	assert(res);
+	printf("ft_strtrim(\"aalaallaallaaal\", \"admkds l\") == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+
+	res = ft_strtrim("", "admkds l");
+	assert(res);
+	printf("ft_strtrim(\"\", \"admkds l\") == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+
+	res = ft_strtrim("", "");
+	assert(res);
+	printf("ft_strtrim(\"\", \"\") == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+}
 
 //char	**ft_split(char const *s, char c);
-void	test_ft_split(void);
+void	test_ft_split(void)
+{
+	char	**res;
 
+	res = ft_split("bbbabbbb", 'a');
+	assert(res);
+	printf("ft_split(\"bbbabbbb\", 'a')");
+	verif_malloc_size(res, 3 * sizeof(char *));
+	assert(!strcmp(res[0], "bbb"));
+	verif_malloc_size(res[0], 4);
+	assert(!strcmp(res[1], "bbbb"));
+	verif_malloc_size(res[1], 5);
+	assert(!res[2]);
+	free(res);
+
+	res = ft_split("bbbabbbbabb", 'a');
+	assert(res);
+	printf("ft_split(\"bbbabbbbabb\", 'a')");
+	verif_malloc_size(res, 4 * sizeof(char *));
+	assert(!strcmp(res[0], "bbb"));
+	verif_malloc_size(res[0], 4);
+	assert(!strcmp(res[1], "bbbb"));
+	verif_malloc_size(res[1], 5);
+	assert(!strcmp(res[2], "bb"));
+	verif_malloc_size(res[2], 3);
+	assert(!res[3]);
+	free(res);
+
+	res = ft_split("bbbabbbbabb", 'c');
+	assert(res);
+	printf("ft_split(\"bbbabbbbabb\", 'c')");
+	verif_malloc_size(res, 2 * sizeof(char *));
+	assert(!strcmp(res[0], "bbbabbbbabb"));
+	verif_malloc_size(res[0], 12);
+	assert(!res[1]);
+	free(res);
+
+	res = ft_split("abbbabbbbabbaaa", 'a');
+	assert(res);
+	printf("ft_split(\"abbbabbbbabbaaa\", 'a')");
+	verif_malloc_size(res, 4 * sizeof(char *));
+	assert(!strcmp(res[0], "bbb"));
+	verif_malloc_size(res[0], 4);
+	assert(!strcmp(res[1], "bbbb"));
+	verif_malloc_size(res[1], 5);
+	assert(!strcmp(res[2], "bb"));
+	verif_malloc_size(res[2], 3);
+	assert(!res[3]);
+	free(res);
+
+	res = ft_split("aaaa", 'a');
+	assert(res);
+	printf("ft_split(\"aaaa\", 'a')");
+	verif_malloc_size(res, 1 * sizeof(char *));
+	assert(!res[0]);
+	free(res);
+
+	res = ft_split("", 'a');
+	assert(res);
+	printf("ft_split(\"\", 'a')");
+	verif_malloc_size(res, 1 * sizeof(char *));
+	assert(!res[0]);
+	free(res);
+
+	res = ft_split("aaabbaabbb", '\0');
+	assert(res);
+	printf("ft_split(\"aaabbaabbb\", '\\0')");
+	verif_malloc_size(res, 2 * sizeof(char *));
+	assert(!strcmp(res[0], "aaabbaabbb"));
+	verif_malloc_size(res[0], 11);
+	assert(!res[1]);
+	free(res);
+
+	res = ft_split("abbbb", 'a');
+	assert(res);
+	printf("ft_split(\"abbbb\", 'a')");
+	verif_malloc_size(res, 2 * sizeof(char *));
+	assert(!strcmp(res[0], "bbbb"));
+	verif_malloc_size(res[0], 5);
+	assert(!res[1]);
+	free(res);
+
+	res = ft_split("bbbba", 'a');
+	assert(res);
+	printf("ft_split(\"bbbba\", 'a')");
+	verif_malloc_size(res, 2 * sizeof(char *));
+	assert(!strcmp(res[0], "bbbb"));
+	verif_malloc_size(res[0], 5);
+	assert(!res[1]);
+	free(res);
+
+	// @TODO Test NULL input ?
+}
+
+#include <limits.h>
 //char	*ft_itoa(int n);
-void	test_ft_itoa(void);
+void	test_ft_itoa(void)
+{
+	int	inputs[] = {0, INT_MAX, INT_MIN, 0, 1, -1, 42, -42};
+	char	*ft_res;
+	char	res[20];
+	int		len;
+
+	for (int i = 0; i < 8; i++)
+	{
+		ft_res = ft_itoa(inputs[i]);
+		len = sprintf(res, "%d", inputs[i]);
+		assert(ft_res);
+		printf("ft_itoa(%d) == \"%s\"", inputs[i], ft_res);
+		assert(!strcmp(res, ft_res));
+		verif_malloc_size(ft_res, len + 1);
+		free(ft_res);
+	}
+}
+
+char	add(unsigned int i, char c)
+{
+	return (i + c);
+}
 
 //char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-void	test_ft_strmapi(void);
+void	test_ft_strmapi(void)
+{
+	char	*res;
+
+	res = ft_strmapi("12345", add); // if coredump -> trying to write in data layer
+	assert(!strcmp(res, "13579"));
+	verif_malloc_size(res, 6);
+	free(res);
+
+	res = ft_strmapi("", add);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
+}
+
+void	add2(unsigned int i, char *c)
+{
+	*c += i;
+}
 
 //void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void	test_ft_striteri(void);
+void	test_ft_striteri(void)
+{
+	char	*res;
+
+	res = (char []){'1', '2', '3', '4', '5', '\0'};
+	ft_striteri(res, add2);
+	assert(!strcmp(res, "13579"));
+	verif_malloc_size(res, 6);
+
+	res = (char []){'\0'};
+	ft_striteri(res, add2);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+}
 
 //void	ft_putchar_fd(char c, int fd);
-void	test_ft_putchar_fd(void);
+void	test_ft_putchar_fd(void)
+{
+	//int	fd = open("test_put", O_RDWR | O_CREAT);
+}
 
 //void	ft_putstr_fd(char *s, int fd);
-void	test_ft_putstr_fd(void);
+void	test_ft_putstr_fd(void)
+{
+	//
+}
 
 //void	ft_putendl_fd(char *s, int fd);
-void	test_ft_putendl_fd(void);
+void	test_ft_putendl_fd(void)
+{
+	//
+}
 
 //void	ft_putnbr_fd(int n, int fd);
-void	test_ft_putnbr_fd(void);
+void	test_ft_putnbr_fd(void)
+{
+	//
+}
 
 int	main(void)
 {

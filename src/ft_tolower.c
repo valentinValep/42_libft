@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/08 23:17:38 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/09 21:39:06 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/09 23:49:08 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+//int	ft_tolower(int c)
+//{
+//	if (c >= -128 && c < -1)
+//		return ((unsigned char) c);
+//	return (c + ('a' - 'A') * (c >= 'A' && c <= 'Z'));
+//}
 
-// @TODO implements
-#include <string.h>
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	ft_tolower(int c)
 {
-	return (memcpy(dest, src, n));
+	return (c + (int []){256, 32 * (c >= 65 && c <= 90)}[c < -128 || c > -2]);
 }

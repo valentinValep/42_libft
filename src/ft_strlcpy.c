@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/08 23:17:38 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/08 02:45:48 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/09 22:14:17 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include "libft.h"
 
-// @TODO implements
-#include <string.h>
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	return (memcpy(dest, src, n));
+	unsigned int		i;
+	const unsigned int	lsrc = ft_strlen(src);
+
+	if (!size)
+		return (lsrc);
+	i = 0;
+	while (i < size - 1 && src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i++] = 0;
+	return (lsrc);
 }

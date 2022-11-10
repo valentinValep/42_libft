@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/08 23:17:38 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/09 22:05:15 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/09 22:13:38 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
 // @TODO implements
 #include <string.h>
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+char	*ft_strrchr(const char *string, int searchedChar)
 {
-	return (memcpy(dest, src, n));
+	return (strrchr(string, searchedChar));
 }

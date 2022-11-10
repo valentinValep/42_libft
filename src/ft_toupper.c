@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/08 23:17:38 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/09 21:39:06 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/10 01:21:32 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+//{
+//	if (c < -1 && c >= -128)
+//		return ((unsigned char) c);
+//	return (c + ('A' - 'a') * (c >= 'a' && c <= 'z'));
+//}
 
-// @TODO implements
-#include <string.h>
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	ft_toupper(int c)
 {
-	return (memcpy(dest, src, n));
+	return (c + (int []){256, -32 * (c >= 97 && c <= 122)}[c < -128 || c > -2]);
 }

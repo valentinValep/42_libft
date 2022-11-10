@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2022/11/08 21:36:03 by vlepille         ###   ########.fr        #
+#    Updated: 2022/11/10 01:17:58 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ CC = gcc
 
 FLAGS = -Wall -Werror -Wextra
 
+INCLUDES = -I.
+
 SRC = src/ft_isalnum.c \
 	src/ft_isalpha.c \
 	src/ft_isascii.c \
@@ -23,19 +25,19 @@ SRC = src/ft_isalnum.c \
 	src/ft_isprint.c \
 	src/ft_strlen.c \
 	src/ft_memset.c \
-	#src/ft_bzero.c \
-	#src/ft_memcpy.c \
-	#src/ft_memmove.c \
-	#src/ft_strlcpy.c \
-	#src/ft_strlcat.c \
-	#src/ft_toupper.c \
-	#src/ft_tolower.c \
-	#src/ft_strchr.c \
-	#src/ft_strrchr.c \
-	#src/ft_strncmp.c \
-	#src/ft_memchr.c \
-	#src/ft_memcmp.c \
-	#src/ft_strnstr.c \
+	src/ft_bzero.c \
+	src/ft_memcpy.c \
+	src/ft_memmove.c \
+	src/ft_strlcpy.c \
+	src/ft_strlcat.c \
+	src/ft_toupper.c \
+	src/ft_tolower.c \
+	src/ft_strchr.c \
+	src/ft_strrchr.c \
+	src/ft_strncmp.c \
+	src/ft_memchr.c \
+	src/ft_memcmp.c \
+	src/ft_strnstr.c \
 	src/ft_atoi.c \
 	#src/ft_calloc.c \
 	#src/ft_strdup.c \
@@ -68,19 +70,19 @@ OBJ = bin/ft_isalnum.o \
 	bin/ft_isprint.o \
 	bin/ft_strlen.o \
 	bin/ft_memset.o \
-	#bin/ft_bzero.o \
-	#bin/ft_memcpy.o \
-	#bin/ft_memmove.o \
-	#bin/ft_strlcpy.o \
-	#bin/ft_strlcat.o \
-	#bin/ft_toupper.o \
-	#bin/ft_tolower.o \
-	#bin/ft_strchr.o \
-	#bin/ft_strrchr.o \
-	#bin/ft_strncmp.o \
-	#bin/ft_memchr.o \
-	#bin/ft_memcmp.o \
-	#bin/ft_strnstr.o \
+	bin/ft_bzero.o \
+	bin/ft_memcpy.o \
+	bin/ft_memmove.o \
+	bin/ft_strlcpy.o \
+	bin/ft_strlcat.o \
+	bin/ft_toupper.o \
+	bin/ft_tolower.o \
+	bin/ft_strchr.o \
+	bin/ft_strrchr.o \
+	bin/ft_strncmp.o \
+	bin/ft_memchr.o \
+	bin/ft_memcmp.o \
+	bin/ft_strnstr.o \
 	bin/ft_atoi.o \
 	#bin/ft_calloc.o \
 	#bin/ft_strdup.o \
@@ -111,13 +113,18 @@ RM = rm -f
 $(NAME) : $(OBJ)
 	ar -rc $(NAME) $(OBJ)
 
+# @TODO CALL $(NAME) ?? Ask Yanis
+# @TODO MAKE BONUS :p
+#bonus : $(NAME)
+#	ar -rc $(NAME) $(BONUS_OBJ)
+
 bin/%.o : src/%.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
 test : $(NAME) test.c # @TODO RM
-	$(CC) $(FLAGS) -g3 -o test.exe test.c $(NAME)
+	$(CC) $(FLAGS) -g3 -o test.exe test.c $(NAME) -lbsd
 
-norminette : # @TODO RM
+nor : # @TODO RM
 	py -m norminette src/
 
 all : $(NAME)

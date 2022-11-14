@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:46:50 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 05:15:26 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:59:08 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// @TODO Implements
+#include <unistd.h>
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n && fd)
-		return ;
-	return ;
+	(n > 9 && (ft_putnbr_fd(n / 10, fd), 1)) || (write(fd, "-", n < 0), 1);
+	write(fd, &(char){n % 10 *~-((n > 0) * 2) + 48}, 1);
 }

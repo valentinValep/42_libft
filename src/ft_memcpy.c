@@ -6,15 +6,18 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/08 23:17:38 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:01:06 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-// @TODO implements
-#include <string.h>
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
-	return (memcpy(dest, src, n));
+	if (!size)
+		return (dest);
+	(dest < src && (*(char *)dest = *(char *)src, 1));
+	ft_memcpy(dest + 1, src + 1, size - 1);
+	(dest > src && (*(char *)dest = *(char *)src, 1));
+	return (dest);
 }

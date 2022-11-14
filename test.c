@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/10 08:51:21 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:49:43 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <bsd/string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <limits.h>
+#include <unistd.h>
+#include <malloc.h>
 
 void	test_ft_isalnum(void)
 {
@@ -157,16 +161,22 @@ void	test_ft_bzero(void)
 
 void	uni_test_memcpy(int n)
 {
-	char	src[] = "ZIZI";
-	char	src2[] = "ZIZI";
-	char	dest[5] = "CACA";
-	char	dest2[5] = "CACA";
-	char	*new = memcpy(dest, src, n);
-	char	*new2 = ft_memcpy(dest2, src2, n);
-	for (int i = 0; i < 5; i++)
-		assert(dest[i] == dest2[i]);
-	for (int i = 0; i < 5; i++)
-		assert(new[i] == new2[i]);
+	if (n <= 5)
+	{
+		printf("TEST 1\n");
+		char	src[] = "ZIZI";
+		char	src2[] = "ZIZI";
+		char	dest[5] = "CACA";
+		char	dest2[5] = "CACA";
+		char	*new = memcpy(dest, src, n);
+		char	*new2 = ft_memcpy(dest2, src2, n);
+		printf("real -> %s\n", dest);
+		printf("ft   -> %s\n", dest2);
+		for (int i = 0; i < 5; i++)
+			assert(dest[i] == dest2[i]);
+		for (int i = 0; i < 5; i++)
+			assert(new[i] == new2[i]);
+	}
 
 	char	src8[] = "ZICAPITAMIXTAPE";
 	char	src28[] = "ZICAPITAMIXTAPE";
@@ -174,6 +184,9 @@ void	uni_test_memcpy(int n)
 	char	*dest28 = src28 + 2;
 	char	*new8 = memcpy(dest8, src8, n);
 	char	*new28 = ft_memcpy(dest28, src28, n);
+	printf("TEST 2\n");
+	printf("real -> %s\n", dest8);
+	printf("ft   -> %s\n", dest28);
 	for (int i = 0; i < 5; i++)
 		assert(dest8[i] == dest28[i]);
 	for (int i = 0; i < 5; i++)
@@ -185,6 +198,9 @@ void	uni_test_memcpy(int n)
 	char	*src289 = dest289 + 2;
 	char	*new89 = memcpy(dest89, src89, n);
 	char	*new289 = ft_memcpy(dest289, src289, n);
+	printf("TEST 3\n");
+	printf("real -> %s\n", dest89);
+	printf("ft   -> %s\n", dest289);
 	for (int i = 0; i < 5; i++)
 		assert(dest89[i] == dest289[i]);
 	for (int i = 0; i < 5; i++)
@@ -194,7 +210,7 @@ void	uni_test_memcpy(int n)
 //void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	test_ft_memcpy(void)
 {
-	int	inputs[] = {0, 1, 4};
+	int	inputs[] = {0, 1, 4, 10};
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -268,7 +284,6 @@ void	test_ft_memmove(void)
 	}
 }
 
-#include <bsd/string.h>
 void	test_ft_strlcpy(void)
 {
 	char	dest[20] = "1234567890123456789";
@@ -461,7 +476,7 @@ void	test_ft_memchr(void)
 
 	for (int i = 0; i < 22; i++)
 	{
-		printf("ft_memchr(%s, %d, %ld) == memchr(%s, %d, %ld)\n", inputs[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs2[i]);
+		printf("ft_memchr(%s, %d (%c), %ld) == memchr(%s, %d (%c), %ld) == %s == %s\n", inputs[i], inputs1[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs1[i], inputs2[i], (char *)ft_memchr(inputs[i], inputs1[i], inputs2[i]), (char *)memchr(inputs[i], inputs1[i], inputs2[i]));
 		assert(ft_memchr(inputs[i], inputs1[i], inputs2[i]) == memchr(inputs[i], inputs1[i], inputs2[i]));
 	}
 }
@@ -476,7 +491,7 @@ void	test_ft_memcmp(void)
 	for (int i = 0; i < 10; i++)
 	{
 		printf("ft_memcmp(%s, %s, %ld) == memcmp(%s, %s, %ld) -> %d == %d\n", inputs[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs2[i], ft_memcmp(inputs[i], inputs1[i], inputs2[i]), memcmp(inputs[i], inputs1[i], inputs2[i]));
-		assert(ft_memcmp(inputs[i], inputs1[i], inputs2[i]) == memcmp(inputs[i], inputs1[i], inputs2[i]));
+		assert(!ft_memcmp(inputs[i], inputs1[i], inputs2[i]) == !memcmp(inputs[i], inputs1[i], inputs2[i]));
 	}
 }
 
@@ -513,22 +528,25 @@ void	test_ft_atoi(void)
 	}
 }
 
-#include <malloc.h>
 //void	*ft_calloc(size_t nmemb, size_t size);
 void	test_ft_calloc(void)
 {
-	char	*ft_res = ft_calloc(5, 1);
-	char	*res = calloc(5, 1);
+	char	*ft_res = ft_calloc(24, 1);
+	char	*res = calloc(24, 1);
 	char	*ft_res2 = ft_calloc(0, 1);
 	char	*res2 = calloc(0, 1);
 	char	*ft_res3 = ft_calloc(5, 0);
 	char	*res3 = calloc(5, 0);
 	char	*ft_res4 = ft_calloc(__INT_MAX__, __INT_MAX__);
 	char	*res4 = calloc(__INT_MAX__, __INT_MAX__);
+	char	*ft_res5 = ft_calloc(25, 1);
+	char	*res5 = calloc(25, 1);
 	char	*tmp;
+	char	*tmp5;
 
 	// if NULL : problem, retry
 	assert(ft_res && res);
+	assert(ft_res5 && res5);
 	printf("Testing ft_calloc(0, 1)\n");
 	tmp = malloc(0);
 	assert(malloc_usable_size(ft_res2) == malloc_usable_size(tmp) && \
@@ -536,6 +554,8 @@ void	test_ft_calloc(void)
 	free(tmp);
 	printf("Testing ft_calloc(5, 0)\n");
 	tmp = malloc(0);
+	printf("%ld\n", malloc_usable_size(ft_res3));
+	printf("%ld\n", malloc_usable_size(tmp));
 	assert(malloc_usable_size(ft_res3) == malloc_usable_size(tmp) && \
 		malloc_usable_size(res3) == malloc_usable_size(tmp));
 	free(tmp);
@@ -544,10 +564,18 @@ void	test_ft_calloc(void)
 		assert(!ft_res[i] && !res[i]);
 	printf("Memory set to zero test finished\n");
 	printf("Memory size check processing..\n");
-	tmp = malloc(5);
+	tmp = malloc(24);
+	tmp5 = malloc(25);
+	printf("%ld\n", malloc_usable_size(ft_res));
+	printf("%ld\n", malloc_usable_size(tmp));
+	printf("%ld\n", malloc_usable_size(ft_res5));
+	printf("%ld\n", malloc_usable_size(tmp5));
 	assert(malloc_usable_size(ft_res) == malloc_usable_size(tmp) && \
 		malloc_usable_size(res) == malloc_usable_size(tmp));
+	assert(malloc_usable_size(ft_res5) == malloc_usable_size(tmp5) && \
+		malloc_usable_size(res5) == malloc_usable_size(tmp5));
 	free(tmp);
+	free(tmp5);
 	printf("Memory size check finished\n");
 	printf("Integer overflow check processing..\n");
 	printf("ft_calloc(2147483648, 1) == %p\n", ft_res4);
@@ -844,7 +872,6 @@ void	test_ft_split(void)
 	// @TODO Test NULL input ?
 }
 
-#include <limits.h>
 //char	*ft_itoa(int n);
 void	test_ft_itoa(void)
 {
@@ -910,25 +937,75 @@ void	test_ft_striteri(void)
 //void	ft_putchar_fd(char c, int fd);
 void	test_ft_putchar_fd(void)
 {
-	//int	fd = open("test_put", O_RDWR | O_CREAT);
+	int	fd = open("test_put", O_RDWR | O_CREAT);
+
+	ft_putchar_fd('c', fd);
+	char res[2] = {0};
+	read(fd, res, 2);
+	assert(strcmp(res, "c"));
+	close(fd);
 }
 
 //void	ft_putstr_fd(char *s, int fd);
 void	test_ft_putstr_fd(void)
 {
-	//
+	int	fd = open("test_put", O_RDWR | O_CREAT);
+
+	ft_putstr_fd("bebe pas beau", fd);
+	char res[15] = {0};
+	read(fd, res, 15);
+	assert(strcmp(res, "bebe pas beau"));
+	close(fd);
 }
 
 //void	ft_putendl_fd(char *s, int fd);
 void	test_ft_putendl_fd(void)
 {
-	//
+	int	fd = open("test_put", O_RDWR | O_CREAT);
+
+	ft_putendl_fd("bebe pas beau", fd);
+	char res[16] = {0};
+	read(fd, res, 16);
+	assert(strcmp(res, "bebe pas beau\n"));
+	close(fd);
 }
 
 //void	ft_putnbr_fd(int n, int fd);
 void	test_ft_putnbr_fd(void)
 {
-	//
+	int	fd = open("test_put", O_RDWR | O_CREAT);
+	ft_putnbr_fd(42, fd);
+	char res[50] = {0};
+	read(fd, res, 3);
+	assert(strcmp(res, "42"));
+	close(fd);
+
+	fd = open("test_put", O_RDWR | O_CREAT);
+	ft_putnbr_fd(0, fd);
+	read(fd, res, 2);
+	assert(strcmp(res, "0"));
+	close(fd);
+
+	char real_res[50];
+	sprintf(real_res, "%d", INT_MAX);
+	fd = open("test_put", O_RDWR | O_CREAT);
+	ft_putnbr_fd(INT_MAX, fd);
+	read(fd, res, 50);
+	assert(strcmp(res, real_res));
+	close(fd);
+
+	sprintf(real_res, "%d", INT_MIN);
+	fd = open("test_put", O_RDWR | O_CREAT);
+	ft_putnbr_fd(INT_MAX, fd);
+	read(fd, res, 50);
+	assert(strcmp(res, real_res));
+	close(fd);
+
+	fd = open("test_put", O_RDWR | O_CREAT);
+	ft_putnbr_fd(-42, fd);
+	read(fd, res, 4);
+	assert(strcmp(res, "-42"));
+	close(fd);
 }
 
 int	main(void)

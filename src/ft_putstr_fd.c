@@ -6,14 +6,16 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:46:41 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 05:15:23 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:00:17 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// @TODO Implements
+#include <stddef.h>
+#include <unistd.h>
+
+size_t	ft_strlen(const char *str);
+
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (s && fd)
-		return ;
-	return ;
+	write(fd, s, ft_strlen(s));
 }

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 01:20:47 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 08:55:19 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:39:05 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	n && (*(char *) s = 0, 1) && (ft_bzero(s + 1, n - 1), 0);
+	n && (ft_bzero(s + 1, n - 1), *(char *) s = 0);
 }

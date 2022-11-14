@@ -6,15 +6,20 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:37:48 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 04:41:36 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 15:18:14 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-
-// @TODO implements and remove includes
+#include <stdint.h>
 #include <stdlib.h>
+
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	return (calloc(nmemb, size));
+	void	*res;
+
+	if (nmemb * size > SIZE_MAX)
+		return (NULL);
+	res = malloc(nmemb * size);
+	return (res);
 }

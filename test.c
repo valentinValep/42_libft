@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/14 16:49:43 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:23:33 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,8 +425,9 @@ void	test_ft_strchr(void)
 
 	for (int i = 0; i < 16; i++)
 	{
-		printf("ft_strchr(%s, %d) == strchr(%s, %d)\n", inputs[i],
-			inputs1[i], inputs[i], inputs1[i]);
+		printf("ft_strchr(%s, %d) == strchr(%s, %d) == %s == %s\n", inputs[i],
+			inputs1[i], inputs[i], inputs1[i], ft_strchr(inputs[i], inputs1[i]), strchr(inputs[i],
+				inputs1[i]));
 		assert(ft_strchr(inputs[i], inputs1[i]) == strchr(inputs[i],
 				inputs1[i]));
 	}
@@ -597,7 +598,8 @@ void	test_ft_strdup(void)
 	char	*ft_res = ft_strdup("abcd");
 
 	assert(ft_res && res);
-	printf("strcmp(strdup(\"abcd\"), ft_strdup(\"abcd\"))\n");
+	printf("strcmp(strdup(\"abcd\"), ft_strdup(\"abcd\")) == %s == %s\n",
+		res, ft_res);
 	assert(!strcmp(res, ft_res) && !strcmp(res, "abcd") && !strcmp(ft_res, "abcd"));
 	assert(malloc_usable_size(res) == malloc_usable_size(ft_res));
 	free(res);

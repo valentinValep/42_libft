@@ -6,39 +6,35 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:11:33 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 02:44:10 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:04:59 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// @TODO implements
-#include <bsd/string.h>
+#include <stddef.h>
+
+int	ft_strlen(const char *str);
+#include <stdio.h>
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	return (strnstr(big, little, len));
+	int			i;
+	const int	bl = ft_strlen(big);
+	const int	ll = ft_strlen(little);
+
+	if (!*little)
+		return ((char *)big);
+	if (!*big)
+		return (NULL);
+	i = 0;
+	len = (size_t []){len, bl}[len > (size_t)bl] - ll + 1;
+	while ((int)len > 0)
+	{
+		while (big[i] == little[i] && big[i] && little[i])
+			i++;
+		if (i == ll)
+			return ((char *)big);
+		i = 0;
+		big++;
+		len--;
+	}
+	return (NULL);
 }
-
-//char	*ft_strstr(char *str, char *to_find)
-//{
-//	int	i;
-//	int	j;
-
-//	i = 0;
-//	j = 0;
-//	if (!to_find[0])
-//		return (str);
-//	while (str[i])
-//	{
-//		if (str[i] == to_find[0])
-//		{
-//			while (str[j + i] == to_find[j] && to_find[j] && str[j + i])
-//			{
-//				j++;
-//			}
-//			if (!to_find[j])
-//				return (str + i);
-//			j = 0;
-//		}
-//		i++;
-//	}
-//	return (NULL);
-//}

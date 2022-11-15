@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:37:48 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/14 18:18:33 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:22:07 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*res;
-
 	if (nmemb * size > SIZE_MAX)
 		return (NULL);
-	res = malloc(nmemb * size);
-	return (res);
+	return (malloc(nmemb * size));
 }

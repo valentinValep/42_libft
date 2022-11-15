@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/14 18:23:33 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/15 18:00:39 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	test_ft_isalpha(void)
 
 void	test_ft_isascii(void)
 {
-	int	inputs[] = {'a', 'e', 'z', '0', ' ', '!', ',', '9', 'a' - 1, 'z' + 1, -'f', '\n', '\t', 0, 127, 128, 255, 256};
+	int	inputs[] = {'a', 'e', 'z', '0', ' ', '!', ',', '9', 'a' - 1, 'z' + 1, -'f', '\n', '\t', 0, 127, 128, 255, 256, -1, -150, 300};
 	int	i;
 
 	i = 0;
-	while (i < 18)
+	while (i < 21)
 	{
 		printf("ft_isascii(%d) == isascii(%d)\n", inputs[i], inputs[i]);
 		assert(!ft_isascii(inputs[i]) == !isascii(inputs[i]));
@@ -178,33 +178,33 @@ void	uni_test_memcpy(int n)
 			assert(new[i] == new2[i]);
 	}
 
-	char	src8[] = "ZICAPITAMIXTAPE";
-	char	src28[] = "ZICAPITAMIXTAPE";
-	char	*dest8 = src8 + 2;
-	char	*dest28 = src28 + 2;
-	char	*new8 = memcpy(dest8, src8, n);
-	char	*new28 = ft_memcpy(dest28, src28, n);
-	printf("TEST 2\n");
-	printf("real -> %s\n", dest8);
-	printf("ft   -> %s\n", dest28);
-	for (int i = 0; i < 5; i++)
-		assert(dest8[i] == dest28[i]);
-	for (int i = 0; i < 5; i++)
-		assert(new8[i] == new28[i]);
+	//char	src8[] = "ZICAPITAMIXTAPE";
+	//char	src28[] = "ZICAPITAMIXTAPE";
+	//char	*dest8 = src8 + 2;
+	//char	*dest28 = src28 + 2;
+	//char	*new8 = memcpy(dest8, src8, n);
+	//char	*new28 = ft_memcpy(dest28, src28, n);
+	//printf("TEST 2\n");
+	//printf("real -> %s\n", dest8);
+	//printf("ft   -> %s\n", dest28);
+	//for (int i = 0; i < 5; i++)
+	//	assert(dest8[i] == dest28[i]);
+	//for (int i = 0; i < 5; i++)
+	//	assert(new8[i] == new28[i]);
 
-	char	dest89[] = "ZICAPITAMIXTAPE";
-	char	dest289[] = "ZICAPITAMIXTAPE";
-	char	*src89 = dest89 + 2;
-	char	*src289 = dest289 + 2;
-	char	*new89 = memcpy(dest89, src89, n);
-	char	*new289 = ft_memcpy(dest289, src289, n);
-	printf("TEST 3\n");
-	printf("real -> %s\n", dest89);
-	printf("ft   -> %s\n", dest289);
-	for (int i = 0; i < 5; i++)
-		assert(dest89[i] == dest289[i]);
-	for (int i = 0; i < 5; i++)
-		assert(new89[i] == new289[i]);
+	//char	dest89[] = "ZICAPITAMIXTAPE";
+	//char	dest289[] = "ZICAPITAMIXTAPE";
+	//char	*src89 = dest89 + 2;
+	//char	*src289 = dest289 + 2;
+	//char	*new89 = memcpy(dest89, src89, n);
+	//char	*new289 = ft_memcpy(dest289, src289, n);
+	//printf("TEST 3\n");
+	//printf("real -> %s\n", dest89);
+	//printf("ft   -> %s\n", dest289);
+	//for (int i = 0; i < 5; i++)
+	//	assert(dest89[i] == dest289[i]);
+	//for (int i = 0; i < 5; i++)
+	//	assert(new89[i] == new289[i]);
 }
 
 //void	*ft_memcpy(void *dest, const void *src, size_t n);
@@ -384,6 +384,26 @@ void	test_ft_strlcat(void)
 		if (i % 4 == 3)
 			printf("\n");
 	}
+
+	char *last_dest = malloc(15 * sizeof(*last_dest));
+	char *last_ft_dest = malloc(15 * sizeof(*last_dest));
+	memset(last_dest, 'r', 15);
+	memset(last_ft_dest, 'r', 15);
+	size_t	last_rep = strlcat(last_dest, "lorem ipsum dolor sit amet", 5);
+	size_t	last_ft_rep = ft_strlcat(last_ft_dest, "lorem ipsum dolor sit amet", 5);
+	printf("%ld == %ld\n", last_rep, last_ft_rep);
+	assert(last_rep == last_ft_rep);
+
+	printf("%s == %s\n", last_dest, last_ft_dest);
+	assert(!strcmp(last_dest, last_ft_dest));
+
+	for (int i = 0; i < 15; i++)
+	{
+		printf("'%c' == '%c' -> %d == %d | ", last_dest[i], last_ft_dest[i], last_dest[i], last_ft_dest[i]);
+		assert(last_dest[i] == last_ft_dest[i]);
+		if (i % 4 == 3)
+			printf("\n");
+	}
 }
 
 void	test_ft_toupper()
@@ -444,8 +464,9 @@ void	test_ft_strrchr(void)
 
 	for (int i = 0; i < 16; i++)
 	{
-		printf("ft_strrchr(%s, %d) == strrchr(%s, %d)\n", inputs[i],
-			inputs1[i], inputs[i], inputs1[i]);
+		printf("%d. ft_strrchr(%s, %d) == strrchr(%s, %d) -> %s == %s\n", i + 1, inputs[i],
+			inputs1[i], inputs[i], inputs1[i], ft_strrchr(inputs[i], inputs1[i]),
+			strrchr(inputs[i], inputs1[i]));
 		assert(ft_strrchr(inputs[i], inputs1[i]) == strrchr(inputs[i],
 				inputs1[i]));
 	}
@@ -503,11 +524,11 @@ void	test_ft_strnstr(void)
 	const char		str2[] = "abababa";
 	const char		str3[] = "aabaaabaabababababaaab";
 	const char		str4[] = "";
-	const char		*inputs[] = {str1, str2, str3, str3, str4, str4, str1, str1, str1, str1, str1, str1, str4, str1, str1, str1};
-	const char		*inputs1[] = {"hijkl", "ba", "aaab", "", "aa", "", "abcdf", "xyz", "efgzui", "efgzui", "efgzui", "efgzui", "\0", "", "", "z\0"};
-	const size_t	inputs2[] = {5, 2, 4, 0, 2, 0, 5, 3, 5, 3, 4, 0, 1, 1, 5, 2};
+	const char		*inputs[] = {str1, str2, str3, str3, str4, str4, str1, str1, str1, str1, str1, str1, str4, str1, str1, str1, str1, str1, str1, str1, str1, str1, str1, str1, str1};
+	const char		*inputs1[] = {"hijkl", "ba", "aaab", "", "aa", "", "abcdf", "xyz", "efgzui", "efgzui", "efgzui", "efgzui", "\0", "", "", "z\0", "hijkl", "hijkl", "hijkl", "hijkl", "hijkl", "xyz", "xyz", "xyz", "xyz"};
+	const size_t	inputs2[] = {5, 2, 4, 0, 2, 0, 5, 3, 5, 3, 4, 0, 1, 1, 5, 2, 12, 11, 10, 13, -1, 25, 26, -1, 27};
 
-	for (int i = 0; i < 16; i++)
+	for (int i = 0; i < 24; i++)
 	{
 		printf("ft_strnstr(%s, %s, %ld) == strnstr(%s, %s, %ld) -> \"%s\" == \"%s\"\n", inputs[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs2[i], ft_strnstr(inputs[i], inputs1[i], inputs2[i]), strnstr(inputs[i], inputs1[i], inputs2[i]));
 		assert(ft_strnstr(inputs[i], inputs1[i], inputs2[i]) == strnstr(inputs[i], inputs1[i], inputs2[i]));

@@ -1,8 +1,4 @@
 # TODO
-## Actual
-- Add in makefile every src file and bin
-- Write tests in test.c
-- Put ft_foreach in the libft after understanding how to (in the bonus dir ?)
 ## At the end
 - NORMINETTE and valgrind
 - check each malloc protection and free() (expecially free when problem)

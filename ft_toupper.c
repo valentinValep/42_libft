@@ -6,15 +6,9 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:39:06 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 01:21:32 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:27:04 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//{
-//	if (c < -1 && c >= -128)
-//		return ((unsigned char) c);
-//	return (c + ('A' - 'a') * (c >= 'a' && c <= 'z'));
-//}
 
 int	ft_toupper(int c)
 {

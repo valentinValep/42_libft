@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/10 03:03:16 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:25:40 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ void	ft_putendl_fd(char *s, int fd);
 
 void	ft_putnbr_fd(int n, int fd);
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+//typedef struct s_list
+//{
+//	void			*content;
+//	struct s_list	*next;
+//}					t_list;
 
 //t_list	*ft_lstnew(void *content);
 

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/16 16:48:23 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:17:20 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,12 +504,12 @@ void	test_ft_memchr(void)
 {
 	const char		*inputs[] = {"abcde", "abcde", "", "", "abcde", "uG&62\n\t+<,",
 		"abcde", "abcde", "abacde", "abecde", "abcdeee", "abababab", "abababab",
-		"abcde", "abcde", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklm\0opqrstvwxyz"};
+		"abcde", "abcde", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklmnopqrstvwxyz", "abcdefghijklm\0opqrstvwxyz", "abcdef"};
 	const int		inputs1[] = {'c', 'f', 'a', '\0', '\0',
-		'\n', 'a', 'e', 'a', 'e', 'e', 'a', 'b', 256, -8, -156, 'z', 0, 'g', '\n', '\n', 'o'};
-	const size_t	inputs2[] = {6, 6, 1, 1, 6, 13, 6, 6, 7, 7, 8, 9, 9, 6, 6, 26, 20, 20, 20, 20, 26, 26};
+		'\n', 'a', 'e', 'a', 'e', 'e', 'a', 'b', 256, -8, -156, 'z', 0, 'g', '\n', '\n', 'o', 'c' + 256};
+	const size_t	inputs2[] = {6, 6, 1, 1, 6, 13, 6, 6, 7, 7, 8, 9, 9, 6, 6, 26, 20, 20, 20, 20, 26, 26, 6};
 
-	for (int i = 0; i < 22; i++)
+	for (int i = 0; i < 23; i++)
 	{
 		printf("ft_memchr(%s, %d (%c), %ld) == memchr(%s, %d (%c), %ld) == %s == %s\n", inputs[i], inputs1[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs1[i], inputs2[i], (char *)ft_memchr(inputs[i], inputs1[i], inputs2[i]), (char *)memchr(inputs[i], inputs1[i], inputs2[i]));
 		assert(ft_memchr(inputs[i], inputs1[i], inputs2[i]) == memchr(inputs[i], inputs1[i], inputs2[i]));
@@ -1003,11 +1003,13 @@ void	test_ft_strmapi(void)
 	char	*res;
 
 	res = ft_strmapi("12345", add); // if coredump -> trying to write in data layer
+	printf("ft_strmapi(\"12345\", add) == \"%s\"\n", res);
 	assert(!strcmp(res, "13579"));
 	verif_malloc_size(res, 6);
 	free(res);
 
 	res = ft_strmapi("", add);
+	printf("ft_strmapi(\"\", add) == \"%s\"\n", res);
 	assert(!strcmp(res, ""));
 	verif_malloc_size(res, 1);
 	free(res);
@@ -1025,13 +1027,13 @@ void	test_ft_striteri(void)
 
 	res = (char []){'1', '2', '3', '4', '5', '\0'};
 	ft_striteri(res, add2);
+	printf("ft_striteri(\"12345\", add) == \"%s\"\n", res);
 	assert(!strcmp(res, "13579"));
-	verif_malloc_size(res, 6);
 
 	res = (char []){'\0'};
 	ft_striteri(res, add2);
+	printf("ft_striteri(\"\", add) == \"%s\"\n", res);
 	assert(!strcmp(res, ""));
-	verif_malloc_size(res, 1);
 }
 
 //void	ft_putchar_fd(char c, int fd);
@@ -1228,25 +1230,25 @@ int	main(void)
 	test_ft_strmapi();
 	printf("===== TESTS ft_strmapi() completed.\n\n");
 
-	//printf("===== TESTING ft_striteri()..\n");
-	//test_ft_striteri();
-	//printf("===== TESTS ft_striteri() completed.\n\n");
+	printf("===== TESTING ft_striteri()..\n");
+	test_ft_striteri();
+	printf("===== TESTS ft_striteri() completed.\n\n");
 
-	//printf("===== TESTING ft_putchar_fd()..\n");
-	//test_ft_putchar_fd();
-	//printf("===== TESTS ft_putchar_fd() completed.\n\n");
+	printf("===== TESTING ft_putchar_fd()..\n");
+	test_ft_putchar_fd();
+	printf("===== TESTS ft_putchar_fd() completed.\n\n");
 
-	//printf("===== TESTING ft_putstr_fd()..\n");
-	//test_ft_putstr_fd();
-	//printf("===== TESTS ft_putstr_fd() completed.\n\n");
+	printf("===== TESTING ft_putstr_fd()..\n");
+	test_ft_putstr_fd();
+	printf("===== TESTS ft_putstr_fd() completed.\n\n");
 
-	//printf("===== TESTING ft_putendl_fd()..\n");
-	//test_ft_putendl_fd();
-	//printf("===== TESTS ft_putendl_fd() completed.\n\n");
+	printf("===== TESTING ft_putendl_fd()..\n");
+	test_ft_putendl_fd();
+	printf("===== TESTS ft_putendl_fd() completed.\n\n");
 
-	//printf("===== TESTING ft_putnbr_fd()..\n");
-	//test_ft_putnbr_fd();
-	//printf("===== TESTS ft_putnbr_fd() completed.\n\n");
+	printf("===== TESTING ft_putnbr_fd()..\n");
+	test_ft_putnbr_fd();
+	printf("===== TESTS ft_putnbr_fd() completed.\n\n");
 
 	printf("all TESTS completed. Think about norm ;)");
 }

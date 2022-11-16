@@ -6,14 +6,18 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:44:56 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/15 13:19:03 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:15:24 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// @TODO Implements
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	if (s && f)
-		return ;
-	return ;
+	int		i;
+
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
 }

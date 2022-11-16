@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2022/11/16 15:16:28 by vlepille         ###   ########.fr        #
+#    Updated: 2022/11/16 17:18:00 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,7 +134,7 @@ clean :
 
 fclean : clean # @TODO RM -> $(RM) test.exe
 	$(RM) $(NAME)
-	$(RM) test.exe
+	$(RM) test.exe test_put
 
 re : fclean all
 

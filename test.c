@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/15 18:00:39 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 09:59:03 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -690,6 +690,20 @@ void	test_ft_substr(void)
 	assert(!strcmp(res, ""));
 	verif_malloc_size(res, 1);
 	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 0, 24);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 5, 0) == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijklmnoparstuvwx"));
+	verif_malloc_size(res, 25);
+	free(res);
+
+	res = ft_substr("abcdefghijklmnoparstuvwxyz", 0, 25);
+	assert(res);
+	printf("ft_substr(\"abcdefghijklmnoparstuvwxyz\", 5, 0) == \"%s\"\n", res);
+	assert(!strcmp(res, "abcdefghijklmnoparstuvwxy"));
+	verif_malloc_size(res, 26);
+	free(res);
 }
 
 //char	*ft_strjoin(char const *s1, char const *s2);
@@ -721,6 +735,20 @@ void	test_ft_strjoin(void)
 	printf("ft_strjoin(\"\", \"\") == \"\"\n");
 	assert(!strcmp(res, ""));
 	verif_malloc_size(res, 1);
+	free(res);
+
+	res = ft_strjoin("abcdefghijklmnopqrstuv", "wx");
+	assert(res);
+	printf("ft_strjoin(\"\", \"\") == \"\"\n");
+	assert(!strcmp(res, "abcdefghijklmnopqrstuvwx"));
+	verif_malloc_size(res, 25);
+	free(res);
+
+	res = ft_strjoin("abcdefghijklmnopqrstuv", "wxy");
+	assert(res);
+	printf("ft_strjoin(\"\", \"\") == \"\"\n");
+	assert(!strcmp(res, "abcdefghijklmnopqrstuvwxy"));
+	verif_malloc_size(res, 26);
 	free(res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/16 17:17:20 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 19:09:34 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include <limits.h>
 #include <unistd.h>
 #include <malloc.h>
+#include <errno.h>
+#include <string.h>
 
 void	test_ft_isalnum(void)
 {
@@ -975,7 +977,7 @@ void	test_ft_split(void)
 //char	*ft_itoa(int n);
 void	test_ft_itoa(void)
 {
-	int	inputs[] = {0, INT_MAX, INT_MIN, 0, 1, -1, 42, -42};
+	int	inputs[] = {0, INT_MAX, INT_MIN, 1, -1, 42, -42, 1000};
 	char	*ft_res;
 	char	res[20];
 	int		len;
@@ -1039,8 +1041,13 @@ void	test_ft_striteri(void)
 //void	ft_putchar_fd(char c, int fd);
 void	test_ft_putchar_fd(void)
 {
-	int	fd = open("test_put", O_RDWR | O_CREAT);
+	int	fd = open("test_put", O_RDWR | O_CREAT, S_IRWXU | S_IRWXG | S_IRWXO);
 
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putchar_fd('c', fd);
 	char res[2] = {0};
 	read(fd, res, 2);
@@ -1053,6 +1060,11 @@ void	test_ft_putstr_fd(void)
 {
 	int	fd = open("test_put", O_RDWR | O_CREAT);
 
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putstr_fd("bebe pas beau", fd);
 	char res[15] = {0};
 	read(fd, res, 15);
@@ -1065,6 +1077,11 @@ void	test_ft_putendl_fd(void)
 {
 	int	fd = open("test_put", O_RDWR | O_CREAT);
 
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putendl_fd("bebe pas beau", fd);
 	char res[16] = {0};
 	read(fd, res, 16);
@@ -1076,6 +1093,11 @@ void	test_ft_putendl_fd(void)
 void	test_ft_putnbr_fd(void)
 {
 	int	fd = open("test_put", O_RDWR | O_CREAT);
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putnbr_fd(42, fd);
 	char res[50] = {0};
 	read(fd, res, 3);
@@ -1083,6 +1105,11 @@ void	test_ft_putnbr_fd(void)
 	close(fd);
 
 	fd = open("test_put", O_RDWR | O_CREAT);
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putnbr_fd(0, fd);
 	read(fd, res, 2);
 	assert(strcmp(res, "0"));
@@ -1091,6 +1118,11 @@ void	test_ft_putnbr_fd(void)
 	char real_res[50];
 	sprintf(real_res, "%d", INT_MAX);
 	fd = open("test_put", O_RDWR | O_CREAT);
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putnbr_fd(INT_MAX, fd);
 	read(fd, res, 50);
 	assert(strcmp(res, real_res));
@@ -1098,12 +1130,22 @@ void	test_ft_putnbr_fd(void)
 
 	sprintf(real_res, "%d", INT_MIN);
 	fd = open("test_put", O_RDWR | O_CREAT);
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putnbr_fd(INT_MAX, fd);
 	read(fd, res, 50);
 	assert(strcmp(res, real_res));
 	close(fd);
 
 	fd = open("test_put", O_RDWR | O_CREAT);
+	if (fd == -1)
+	{
+		printf("Problem when opening file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
 	ft_putnbr_fd(-42, fd);
 	read(fd, res, 4);
 	assert(strcmp(res, "-42"));

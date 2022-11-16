@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/16 14:32:21 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:48:23 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -722,6 +722,13 @@ void	test_ft_substr(void)
 	assert(!strcmp(res, "abcdefghijklmnoparstuvwxy"));
 	verif_malloc_size(res, 26);
 	free(res);
+
+	res = ft_substr("l", 1, 1);
+	assert(res);
+	printf("ft_substr(\"l\", 1, 1) == \"%s\"\n", res);
+	assert(!strcmp(res, ""));
+	verif_malloc_size(res, 1);
+	free(res);
 }
 
 //char	*ft_strjoin(char const *s1, char const *s2);
@@ -976,9 +983,9 @@ void	test_ft_itoa(void)
 	for (int i = 0; i < 8; i++)
 	{
 		ft_res = ft_itoa(inputs[i]);
-		len = sprintf(res, "%d", inputs[i]);
 		assert(ft_res);
-		printf("ft_itoa(%d) == \"%s\"", inputs[i], ft_res);
+		len = sprintf(res, "%d", inputs[i]);
+		printf("ft_itoa(%d) -> \"%s\" (need \"%s\")\n", inputs[i], ft_res, res);
 		assert(!strcmp(res, ft_res));
 		verif_malloc_size(ft_res, len + 1);
 		free(ft_res);
@@ -1217,9 +1224,9 @@ int	main(void)
 	test_ft_itoa();
 	printf("===== TESTS ft_itoa() completed.\n\n");
 
-	//printf("===== TESTING ft_strmapi()..\n");
-	//test_ft_strmapi();
-	//printf("===== TESTS ft_strmapi() completed.\n\n");
+	printf("===== TESTING ft_strmapi()..\n");
+	test_ft_strmapi();
+	printf("===== TESTS ft_strmapi() completed.\n\n");
 
 	//printf("===== TESTING ft_striteri()..\n");
 	//test_ft_striteri();

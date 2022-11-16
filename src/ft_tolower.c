@@ -6,16 +6,9 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:39:06 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/09 23:49:08 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 17:49:51 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//int	ft_tolower(int c)
-//{
-//	if (c >= -128 && c < -1)
-//		return ((unsigned char) c);
-//	return (c + ('a' - 'A') * (c >= 'A' && c <= 'Z'));
-//}
 
 int	ft_tolower(int c)
 {

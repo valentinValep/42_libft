@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:11:33 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/15 18:04:59 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:16:27 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
 int	ft_strlen(const char *str);
-#include <stdio.h>
+
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	int			i;

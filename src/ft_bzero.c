@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 01:20:47 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/15 15:38:34 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:15:38 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
+//n && ((*(char *)s = 0, 1) && (ft_bzero(s + 1, n - 1), 1));
 void	ft_bzero(void *s, size_t n)
 {
-	//n && ((*(char *)s = 0, 1) && (ft_bzero(s + 1, n - 1), 1));
 	n && (ft_bzero(s + 1, n - 1), *(char *) s = 0);
 }

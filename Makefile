@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2022/11/10 05:17:04 by vlepille         ###   ########.fr        #
+#    Updated: 2022/11/16 11:29:38 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,7 @@ test : $(NAME) test.c # @TODO RM
 	$(CC) $(FLAGS) -g3 -o test.exe test.c $(NAME) -lbsd
 
 nor : # @TODO RM
-	py -m norminette src/
+	norminette src/
 
 all : $(NAME)
 

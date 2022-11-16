@@ -9,3 +9,4 @@
 - rm -README.md Libft_subject.pdf test.c libft.h
 - remove test rule of Makefile
 - check every file for @TODO
+- check every static

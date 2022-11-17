@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:51:22 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/16 19:12:48 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/17 13:08:21 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-int	int_len(int n)
+static int	int_len(int n)
 {
 	if (n / 10)
 	{

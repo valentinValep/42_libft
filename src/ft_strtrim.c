@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:45:53 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/16 14:33:28 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/17 15:10:07 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = ft_strlen(s1) - 1;
 	while (is_in(s1[i], set) && i > 0)
 		i--;
-	if (i <= 0)
-	{
-		res = malloc(sizeof(char));
-		if (!res)
-			return (0);
-		*res = 0;
-		return (res);
-	}
+	if (i < 0)
+		return (ft_strdup(""));
 	res = malloc((i + 2) * sizeof(char));
 	if (!res)
 		return (0);

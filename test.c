@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/16 19:09:34 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:21:26 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 #include <malloc.h>
 #include <errno.h>
 #include <string.h>
+#include <stdint.h>
+
+int	cmp_to_cmp(int i)
+{
+	return ((i > 0) - (i < 0));
+}
 
 void	test_ft_isalnum(void)
 {
@@ -480,21 +486,14 @@ void	test_ft_strrchr(void)
 	}
 }
 
-int	cmp_to_cmp(int i)
-{
-	if (!i)
-		return (i);
-	return (i / i);
-}
-
 //int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void	test_ft_strncmp(void)
 {
-	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "ab\0cd"};
-	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "ab\0cd"};
-	int	inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5};
+	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "ab\0cd", (char []){'4', '2', -50}, "test\200"};
+	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "ab\0cd", "42", "test\0"};
+	int	inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5, 3, 6};
 
-	for (int i = 0; i < 9; i++)
+	for (size_t i = 0; i < sizeof(inputs) / sizeof(*inputs); i++)
 	{
 		printf("ft_strncmp(%s, %s, %d) == strncmp(%s, %s, %d) -> %d == %d\n", inputs[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs2[i], ft_strncmp(inputs[i], inputs1[i], inputs2[i]), strncmp(inputs[i], inputs1[i], inputs2[i]));
 		assert(cmp_to_cmp(ft_strncmp(inputs[i], inputs1[i], inputs2[i])) == cmp_to_cmp(strncmp(inputs[i], inputs1[i], inputs2[i])));
@@ -521,14 +520,15 @@ void	test_ft_memchr(void)
 //int	ft_memcmp(const void *s1, const void *s2, size_t n);
 void	test_ft_memcmp(void)
 {
-	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "te\0st"};
-	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "te\0at"};
-	size_t		inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5};
+	// if the last 2 don't pass, a cast to UNSIGNED char is missing
+	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "te\0st", (char []){0, 0, 127, 0}, (char []){0, 0, 127, 0}};
+	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "te\0at", (char []){-128, 0, 127, 0}, (char []){0, 0, 42, 0}};
+	size_t		inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5, 1, 4};
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; (size_t)i < sizeof(inputs) / sizeof(*inputs); i++)
 	{
 		printf("ft_memcmp(%s, %s, %ld) == memcmp(%s, %s, %ld) -> %d == %d\n", inputs[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs2[i], ft_memcmp(inputs[i], inputs1[i], inputs2[i]), memcmp(inputs[i], inputs1[i], inputs2[i]));
-		assert(!ft_memcmp(inputs[i], inputs1[i], inputs2[i]) == !memcmp(inputs[i], inputs1[i], inputs2[i]));
+		assert(cmp_to_cmp(ft_memcmp(inputs[i], inputs1[i], inputs2[i])) == cmp_to_cmp(memcmp(inputs[i], inputs1[i], inputs2[i])));
 	}
 }
 
@@ -553,11 +553,11 @@ void	test_ft_strnstr(void)
 //int	ft_atoi(const char *str);
 void	test_ft_atoi(void)
 {
-	char	*inputs[] = {"0", "9", "5", "17", "42", "128", "-128", "-0", "a42", "4a2", "42a", "-a42", "-4a2", "+42", " +42", "  42", "4 2", "1 000", "++42", "+-42"};
+	char	*inputs[] = {"0", "9", "5", "17", "42", "128", "-128", "-0", "a42", "4a2", "42a", "-a42", "-4a2", "+42", " +42", "  42", "4 2", "1 000", "++42", "+-42", "\n42", "\t42", "\v-42", "\f42", "\r42", " -42"};
 	int		i;
 
 	i = 0;
-	while (i < 20)
+	while ((size_t)i < sizeof(inputs) / sizeof(*inputs))
 	{
 		printf("ft_atoi(%s) == atoi(%s) -> %d, %d\n", inputs[i], inputs[i], ft_atoi(inputs[i]), atoi(inputs[i]));
 		assert(ft_atoi(inputs[i]) == atoi(inputs[i]));
@@ -574,8 +574,8 @@ void	test_ft_calloc(void)
 	char	*res2 = calloc(0, 1);
 	char	*ft_res3 = ft_calloc(5, 0);
 	char	*res3 = calloc(5, 0);
-	char	*ft_res4 = ft_calloc(__INT_MAX__, __INT_MAX__);
-	char	*res4 = calloc(__INT_MAX__, __INT_MAX__);
+	char	*ft_res4 = ft_calloc(303700050, 303700050);
+	char	*res4 = calloc(303700050, 303700050);
 	char	*ft_res5 = ft_calloc(25, 1);
 	char	*res5 = calloc(25, 1);
 	char	*tmp;
@@ -856,16 +856,23 @@ void	test_ft_strtrim(void)
 
 	res = ft_strtrim("abcdefghijklmnopqrstuvwxyz", "az");
 	assert(res);
-	printf("ft_strtrim(\"\", \"\") == \"%s\"\n", res);
+	printf("ft_strtrim(\"abcdefghijklmnopqrstuvwxyz\", \"az\") == \"%s\"\n", res);
 	assert(!strcmp(res, "bcdefghijklmnopqrstuvwxy"));
 	verif_malloc_size(res, 25);
 	free(res);
 
 	res = ft_strtrim("abcdefghijklmnopqrstuvwxyz", "z");
 	assert(res);
-	printf("ft_strtrim(\"\", \"\") == \"%s\"\n", res);
+	printf("ft_strtrim(\"abcdefghijklmnopqrstuvwxyz\", \"z\") == \"%s\"\n", res);
 	assert(!strcmp(res, "abcdefghijklmnopqrstuvwxy"));
 	verif_malloc_size(res, 26);
+	free(res);
+
+	res = ft_strtrim("abcdba", "acb");
+	assert(res);
+	printf("ft_strtrim(\"abcdba\", \"acb\") == \"%s\"\n", res);
+	assert(!strcmp(res, "d"));
+	verif_malloc_size(res, 2);
 	free(res);
 }
 
@@ -1041,7 +1048,8 @@ void	test_ft_striteri(void)
 //void	ft_putchar_fd(char c, int fd);
 void	test_ft_putchar_fd(void)
 {
-	int	fd = open("test_put", O_RDWR | O_CREAT, S_IRWXU | S_IRWXG | S_IRWXO);
+	remove("test_put");
+	int	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 
 	if (fd == -1)
 	{
@@ -1049,16 +1057,24 @@ void	test_ft_putchar_fd(void)
 		assert(fd != -1);
 	}
 	ft_putchar_fd('c', fd);
+	lseek(fd, 0, SEEK_SET);
 	char res[2] = {0};
-	read(fd, res, 2);
-	assert(strcmp(res, "c"));
+	size_t result = read(fd, res, 2);
+	if (result == (size_t)-1)
+	{
+		printf("Problem when reading file! %s\n", strerror(errno));
+		assert(fd != -1);
+	}
+	printf("ft_putchar_fd(\"c\", fd) == \"%s\"\n", res);
+	assert(!strcmp(res, "c"));
 	close(fd);
+	remove("test_put");
 }
 
 //void	ft_putstr_fd(char *s, int fd);
 void	test_ft_putstr_fd(void)
 {
-	int	fd = open("test_put", O_RDWR | O_CREAT);
+	int	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 
 	if (fd == -1)
 	{
@@ -1066,16 +1082,19 @@ void	test_ft_putstr_fd(void)
 		assert(fd != -1);
 	}
 	ft_putstr_fd("bebe pas beau", fd);
+	lseek(fd, 0, SEEK_SET);
 	char res[15] = {0};
 	read(fd, res, 15);
-	assert(strcmp(res, "bebe pas beau"));
+	printf("ft_putchar_fd(\"bebe pas beau\", fd) == %s\n", res);
+	assert(!strcmp(res, "bebe pas beau"));
 	close(fd);
+	remove("test_put");
 }
 
 //void	ft_putendl_fd(char *s, int fd);
 void	test_ft_putendl_fd(void)
 {
-	int	fd = open("test_put", O_RDWR | O_CREAT);
+	int	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 
 	if (fd == -1)
 	{
@@ -1083,73 +1102,95 @@ void	test_ft_putendl_fd(void)
 		assert(fd != -1);
 	}
 	ft_putendl_fd("bebe pas beau", fd);
+	lseek(fd, 0, SEEK_SET);
 	char res[16] = {0};
 	read(fd, res, 16);
-	assert(strcmp(res, "bebe pas beau\n"));
+	printf("ft_putendl_fd(\"bebe pas beau\", fd) == %s\n", res);
+	assert(!strcmp(res, "bebe pas beau\n"));
 	close(fd);
+	remove("test_put");
 }
 
 //void	ft_putnbr_fd(int n, int fd);
 void	test_ft_putnbr_fd(void)
 {
-	int	fd = open("test_put", O_RDWR | O_CREAT);
+	int	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 	if (fd == -1)
 	{
 		printf("Problem when opening file! %s\n", strerror(errno));
 		assert(fd != -1);
 	}
 	ft_putnbr_fd(42, fd);
-	char res[50] = {0};
+	lseek(fd, 0, SEEK_SET);
+	char *res = (char [50]){0};
 	read(fd, res, 3);
-	assert(strcmp(res, "42"));
+	printf("ft_putnbr_fd(42, fd) == %s\n", res);
+	assert(!strcmp(res, "42"));
 	close(fd);
+	remove("test_put");
 
-	fd = open("test_put", O_RDWR | O_CREAT);
+	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 	if (fd == -1)
 	{
 		printf("Problem when opening file! %s\n", strerror(errno));
 		assert(fd != -1);
 	}
 	ft_putnbr_fd(0, fd);
+	lseek(fd, 0, SEEK_SET);
+	res = (char [50]){0};
 	read(fd, res, 2);
-	assert(strcmp(res, "0"));
+	printf("ft_putnbr_fd(0, fd) == %s\n", res);
+	assert(!strcmp(res, "0"));
 	close(fd);
+	remove("test_put");
 
 	char real_res[50];
 	sprintf(real_res, "%d", INT_MAX);
-	fd = open("test_put", O_RDWR | O_CREAT);
+	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 	if (fd == -1)
 	{
 		printf("Problem when opening file! %s\n", strerror(errno));
 		assert(fd != -1);
 	}
 	ft_putnbr_fd(INT_MAX, fd);
+	lseek(fd, 0, SEEK_SET);
+	res = (char [50]){0};
 	read(fd, res, 50);
-	assert(strcmp(res, real_res));
+	printf("ft_putnbr_fd(INT_MAX, fd) == %s\n", res);
+	assert(!strcmp(res, real_res));
 	close(fd);
+	remove("test_put");
 
 	sprintf(real_res, "%d", INT_MIN);
-	fd = open("test_put", O_RDWR | O_CREAT);
+	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 	if (fd == -1)
 	{
 		printf("Problem when opening file! %s\n", strerror(errno));
 		assert(fd != -1);
 	}
-	ft_putnbr_fd(INT_MAX, fd);
+	ft_putnbr_fd(INT_MIN, fd);
+	lseek(fd, 0, SEEK_SET);
+	res = (char [50]){0};
 	read(fd, res, 50);
-	assert(strcmp(res, real_res));
+	printf("ft_putnbr_fd(INT_MIN, fd) == %s\n", res);
+	assert(!strcmp(res, real_res));
 	close(fd);
+	remove("test_put");
 
-	fd = open("test_put", O_RDWR | O_CREAT);
+	fd = open("test_put", O_RDWR | O_CREAT, 0777);
 	if (fd == -1)
 	{
 		printf("Problem when opening file! %s\n", strerror(errno));
 		assert(fd != -1);
 	}
 	ft_putnbr_fd(-42, fd);
+	lseek(fd, 0, SEEK_SET);
+	res = (char [50]){0};
 	read(fd, res, 4);
-	assert(strcmp(res, "-42"));
+	printf("ft_putnbr_fd(-42, fd) == %s\n", res);
+	assert(!strcmp(res, "-42"));
 	close(fd);
+	remove("test_put");
 }
 
 int	main(void)

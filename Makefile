@@ -6,13 +6,13 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2022/11/17 13:00:52 by vlepille         ###   ########.fr        #
+#    Updated: 2022/11/17 17:01:25 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = gcc
+CC = cc
 
 FLAGS = -Wall -Werror -Wextra
 

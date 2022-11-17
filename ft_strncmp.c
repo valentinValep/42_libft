@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:05:15 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/10 02:05:26 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/17 17:30:08 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_strncmp(const char *first, const char *second, size_t length)
 {
 	int	comp;
 
-	comp = *first - *second;
+	comp = (unsigned char)*first - (unsigned char)*second;
 	if ((!*first && !*second) || !length)
 		return (0);
 	if (comp != 0)

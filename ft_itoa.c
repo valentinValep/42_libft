@@ -1,50 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 04:45:53 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/16 14:33:28 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/16 16:51:22 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/19 09:56:25 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
-static int	is_in(const char c, char const *set)
+static int	int_len(int n)
 {
-	while (*set)
+	if (n / 10)
 	{
-		if (c == *set)
-			return (1);
-		set++;
+		return (1 + int_len(n / 10));
 	}
-	return (0);
+	return (1 + (n < 0));
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_itoa(int n)
 {
-	int		i;
 	char	*res;
+	int		i;
 
-	while (is_in(*s1, set))
-		s1++;
-	i = ft_strlen(s1) - 1;
-	while (is_in(s1[i], set) && i > 0)
-		i--;
-	if (i <= 0)
-	{
-		res = malloc(sizeof(char));
-		if (!res)
-			return (0);
-		*res = 0;
-		return (res);
-	}
-	res = malloc((i + 2) * sizeof(char));
+	i = int_len(n) - 1 - (n < 0);
+	res = malloc((i + 2 + (n < 0)) * sizeof(char));
 	if (!res)
 		return (0);
-	ft_strlcpy(res, s1, i + 2);
+	n < 0 && (res[0] = '-', 1);
+	res[i + 1 + (n < 0)] = 0;
+	while (i >= 0)
+	{
+		res[i + (n < 0)] = '0' + (n % 10) * ((n > 0) * 2 - 1);
+		n = n / 10;
+		i--;
+	}
 	return (res);
 }

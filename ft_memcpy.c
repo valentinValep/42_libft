@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 04:41:55 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/16 17:50:05 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/17 17:45:48 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
-#include <stdlib.h>
-#include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
-	int const	max_len = (int []){ft_strlen(s)
-		- start, 0}[(int)(ft_strlen(s) - start) < 0];
-	int const	res_len = (size_t []){len, max_len}[(int)len > max_len];
-	char *const	res = malloc((res_len + 1) * sizeof(char));
-
-	if (!res)
-		return (0);
-	res[res_len] = 0;
-	return (ft_memcpy(res, s + start, res_len));
+	if (!size)
+		return (dest);
+	dest < src && (*(char *)dest = *(char *)src, 1);
+	ft_memcpy(dest + 1, src + 1, --size);
+	dest > src && (*(char *)dest = *(char *)src, 1);
+	return (dest);
 }

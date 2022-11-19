@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 04:37:48 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/16 17:44:51 by vlepille         ###   ########.fr       */
+/*   Created: 2022/10/22 00:25:56 by marvin            #+#    #+#             */
+/*   Updated: 2022/11/17 14:30:32 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include "libft.h"
+int	ft_isdigit(int c);
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	ft_atoi(char *str)
 {
-	char	*res;
+	int	i;
+	int	res;
+	int	neg;
 
-	if (size != 0 && nmemb * size / size != nmemb)
-		return (NULL);
-	res = malloc(nmemb * size);
-	if (!res)
-		return (0);
-	ft_bzero(res, nmemb * size);
-	return (res);
+	i = 0;
+	res = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	i += ((neg = str[i] == '-') || str[i] == '+');
+	while (ft_isdigit(str[i]))
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	return (res * (!neg - neg));
 }

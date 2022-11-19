@@ -1,43 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 16:51:22 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/17 13:08:16 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/10 04:45:53 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/17 15:10:13 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-static int	int_len(int n)
+static int	is_in(const char c, char const *set)
 {
-	if (n / 10)
+	while (*set)
 	{
-		return (1 + int_len(n / 10));
+		if (c == *set)
+			return (1);
+		set++;
 	}
-	return (1 + (n < 0));
+	return (0);
 }
 
-char	*ft_itoa(int n)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*res;
 	int		i;
+	char	*res;
 
-	i = int_len(n) - 1 - (n < 0);
-	res = malloc((i + 2 + (n < 0)) * sizeof(char));
+	while (is_in(*s1, set))
+		s1++;
+	i = ft_strlen(s1) - 1;
+	while (is_in(s1[i], set) && i > 0)
+		i--;
+	if (i < 0)
+		return (ft_strdup(""));
+	res = malloc((i + 2) * sizeof(char));
 	if (!res)
 		return (0);
-	n < 0 && (res[0] = '-', 1);
-	res[i + 1 + (n < 0)] = 0;
-	while (i >= 0)
-	{
-		res[i + (n < 0)] = '0' + (n % 10) * ((n > 0) * 2 - 1);
-		n = n / 10;
-		i--;
-	}
+	ft_strlcpy(res, s1, i + 2);
 	return (res);
 }

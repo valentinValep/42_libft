@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 22:09:02 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/14 17:01:36 by vlepille         ###   ########.fr       */
+/*   Created: 2022/11/09 21:39:06 by vlepille          #+#    #+#             */
+/*   Updated: 2022/11/19 09:56:45 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-
-int	ft_memcmp(const void *pointer1, const void *pointer2, size_t size)
+int	ft_tolower(int c)
 {
-	int	comp;
-
-	comp = *(char *)pointer1 - *(char *)pointer2;
-	if (!size)
-		return (0);
-	if (comp != 0)
-		return (comp);
-	return (ft_memcmp(pointer1 + 1, pointer2 + 1, size - 1));
+	return (c + (int []){256, 32 * (c >= 65 && c <= 90)}[c < -128 || c > -2]);
 }

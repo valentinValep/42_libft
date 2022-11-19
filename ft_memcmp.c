@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 22:09:02 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/17 14:30:44 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:27:34 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	ft_memcmp(const void *pointer1, const void *pointer2, size_t size)
 {
 	int	comp;
 
-	comp = *(unsigned char *)pointer1 - *(unsigned char *)pointer2;
 	if (!size)
 		return (0);
+	comp = *(unsigned char *)pointer1 - *(unsigned char *)pointer2;
 	if (comp != 0)
 		return (comp);
 	return (ft_memcmp(pointer1 + 1, pointer2 + 1, size - 1));

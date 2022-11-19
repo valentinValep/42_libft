@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:51:22 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/19 09:56:25 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:03:33 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ char	*ft_itoa(int n)
 	res = malloc((i + 2 + (n < 0)) * sizeof(char));
 	if (!res)
 		return (0);
-	n < 0 && (res[0] = '-', 1);
+	if (n < 0)
+		res[0] = '-';
 	res[i + 1 + (n < 0)] = 0;
 	while (i >= 0)
 	{

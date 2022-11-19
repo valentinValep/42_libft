@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 02:27:19 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/17 17:45:48 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/19 10:15:38 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
 	if (!size)
 		return (dest);
-	dest < src && (*(char *)dest = *(char *)src, 1);
+	if (dest < src)
+		*(char *)dest = *(char *)src;
 	ft_memcpy(dest + 1, src + 1, --size);
-	dest > src && (*(char *)dest = *(char *)src, 1);
+	if (dest > src)
+		*(char *)dest = *(char *)src;
 	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 02:45:48 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/15 15:14:04 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:43:14 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	unsigned int	j;
 	size_t			res;
 
-	res = ft_strlen(src) + ft_strlen(dest);
 	i = 0;
-	while (dest[i] && i < size)
-		i++;
-	j = 0;
+	if (dest)
+	{
+		res = ft_strlen(src) + ft_strlen(dest);
+		while (dest[i] && i < size)
+			i++;
+		j = 0;
+	}
 	if (i >= size)
 		return (ft_strlen(src) + size);
 	while (src[j] && i < size - 1)

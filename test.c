@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/17 17:21:26 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:56:03 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,6 +418,11 @@ void	test_ft_strlcat(void)
 	}
 	free(last_dest);
 	free(last_ft_dest);
+	printf("\n");
+
+	printf("--->Crash but the real desn't : ft_strlcat(NULL, \"tg\", 0)<---\n");
+	printf("--->The real return : %lu<---\n", strlcat(NULL, "tg", 0));
+	assert(ft_strlcat(NULL, "tg", 0) == 2);
 }
 
 void	test_ft_toupper()
@@ -489,9 +494,9 @@ void	test_ft_strrchr(void)
 //int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void	test_ft_strncmp(void)
 {
-	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "ab\0cd", (char []){'4', '2', -50}, "test\200"};
-	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "ab\0cd", "42", "test\0"};
-	int	inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5, 3, 6};
+	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "ab\0cd", (char []){'4', '2', -50}, "test\200", "abcdef"};
+	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "ab\0cd", "42", "test\0", "abczef"};
+	int	inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5, 3, 6, 3};
 
 	for (size_t i = 0; i < sizeof(inputs) / sizeof(*inputs); i++)
 	{
@@ -521,9 +526,9 @@ void	test_ft_memchr(void)
 void	test_ft_memcmp(void)
 {
 	// if the last 2 don't pass, a cast to UNSIGNED char is missing
-	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "te\0st", (char []){0, 0, 127, 0}, (char []){0, 0, 127, 0}};
-	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "te\0at", (char []){-128, 0, 127, 0}, (char []){0, 0, 42, 0}};
-	size_t		inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5, 1, 4};
+	const char	*inputs[] = {"abc", "abc", "abc", "azz", "abc", "abc", "abc", "azz", "abz", "te\0st", (char []){0, 0, 127, 0}, (char []){0, 0, 127, 0}, "abcdef"};
+	const char	*inputs1[] = {"abcd", "abc", "acd", "abc", "abcd", "abc", "acd", "abc", "acc", "te\0at", (char []){-128, 0, 127, 0}, (char []){0, 0, 42, 0}, "abzzz"};
+	size_t		inputs2[] = {4, 3, 3, 3, 1, 1, 1, 1, 2, 5, 1, 4, 2};
 
 	for (int i = 0; (size_t)i < sizeof(inputs) / sizeof(*inputs); i++)
 	{
@@ -548,6 +553,9 @@ void	test_ft_strnstr(void)
 		printf("ft_strnstr(%s, %s, %ld) == strnstr(%s, %s, %ld) -> \"%s\" == \"%s\"\n", inputs[i], inputs1[i], inputs2[i], inputs[i], inputs1[i], inputs2[i], ft_strnstr(inputs[i], inputs1[i], inputs2[i]), strnstr(inputs[i], inputs1[i], inputs2[i]));
 		assert(ft_strnstr(inputs[i], inputs1[i], inputs2[i]) == strnstr(inputs[i], inputs1[i], inputs2[i]));
 	}
+	printf("--->Crash but the real desn't : ft_strnstr(NULL, \"tg\", 0)<---\n");
+	printf("--->The real return : %s<---\n", strnstr(NULL, "tg", 0));
+	assert(ft_strnstr(NULL, "tg", 0) == NULL);
 }
 
 //int	ft_atoi(const char *str);

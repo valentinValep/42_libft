@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 02:30:36 by marvin            #+#    #+#             */
-/*   Updated: 2022/11/19 13:56:03 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:34:53 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,12 +273,10 @@ void	uni_test_memmove(int n)
 	for (int i = 0; i < 5; i++)
 		assert(new878[i] == new2878[i]);
 
-	//char	*src007 = NULL;
-	//char	*src2007 = NULL;
-	//char	*dest007 = NULL;
-	//char	*dest2007 = NULL;
-	//ft_memmove(dest2007, src2007, n);
-	//memmove(dest007, src007, n);
+	printf("It doesn't have to crash (ft_memmove(NULL, NULL, %d)) : GG !!`\n", n);
+	char	*null = NULL;
+	ft_memmove(null, null, n);
+	//memmove(null, null, n);
 }
 
 void	test_ft_memmove(void)

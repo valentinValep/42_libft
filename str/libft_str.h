@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   libft_str.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/20 23:54:45 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/21 00:22:01 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LIBFT_STR_H
+# define LIBFT_STR_H
 
-# include "base/libft_base.h"
-# include "str/libft_str.h"
-# include "get_next_line/libft_gnl.h"
-# include "ft_printf/libft_printf.h"
+typedef struct s_string
+{
+	char	*str;
+	int		strlen;
+	int		malloc_size;
+}	t_string;
 
+void	ft_upscale_str(t_string *str, int size);
 
 #endif

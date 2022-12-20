@@ -6,12 +6,12 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/20 23:16:41 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/20 23:27:31 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LIBFT_BASE_H
+# define LIBFT_BASE_H
 
 # include <stddef.h>
 

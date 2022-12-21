@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/21 00:28:27 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/21 08:07:23 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_GNL_H
 # define LIBFT_GNL_H
 
-# include "str/libft_str.h"
+# include "libft_str.h"
 
 # ifndef GNL_BUFFER_SIZE
 #  define GNL_BUFFER_SIZE 42

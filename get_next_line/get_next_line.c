@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:52:39 by vlepille          #+#    #+#             */
-/*   Updated: 2022/12/21 00:28:26 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/21 08:07:34 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft_gnl.h"
-#include "str/libft_str.h"
+#include "libft_str.h"
 
 int	ft_line_join(t_string *res, t_file_reader *buff)
 {

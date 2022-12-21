@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2022/12/20 23:57:20 by vlepille         ###   ########.fr        #
+#    Updated: 2022/12/21 08:07:15 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,21 @@ CC := cc
 
 FLAGS := -Wall -Werror -Wextra
 
-INCLUDES := -I.
+BASE_FILE := base
+STR_FILE := str
+GNL_FILE := get_next_line
+PRINTF_FILE := ft_printf
+
+INCLUDES := -I. -I$(BASE_FILE) -I$(STR_FILE) -I$(GNL_FILE) -I$(PRINTF_FILE)
 
 include base/Makefile
-BASE_SRC := $(addprefix base/, $(SRC))
+BASE_SRC := $(addprefix $(BASE_FILE)/, $(SRC))
 include str/Makefile
-STR_SRC := $(addprefix str/, $(SRC))
+STR_SRC := $(addprefix $(STR_FILE)/, $(SRC))
 include get_next_line/Makefile
-GNL_SRC := $(addprefix get_next_line/, $(SRC))
+GNL_SRC := $(addprefix $(GNL_FILE)/, $(SRC))
 include ft_printf/Makefile
-PRINTF_SRC := $(addprefix ft_printf/, $(SRC))
+PRINTF_SRC := $(addprefix $(PRINTF_FILE)/, $(SRC))
 
 SRC := $(BASE_SRC) $(STR_SRC) $(GNL_SRC) $(PRINTF_SRC)
 

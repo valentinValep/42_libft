@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:46:04 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/16 14:12:41 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:10:40 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static int	str_len_sep(char const *s, char c)
 	return (i);
 }
 
-static void	free_split(char **res, int len)
+void	free_split(char **str_split, int len)
 {
 	while (len > 0)
 	{
-		free(res[len - 1]);
+		free(str_split[len - 1]);
 		len--;
 	}
-	free(res);
+	free(str_split);
 }
 
 char	**ft_split(char const *s, char c)

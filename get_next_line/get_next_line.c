@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:52:39 by vlepille          #+#    #+#             */
-/*   Updated: 2022/12/21 08:07:34 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:09:35 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ t_file_reader	*ft_line_rest(t_file_reader *buff, int fd)
 	return (buff);
 }
 
+/// @brief return the next line of the file given by fd
+/// @param fd : file descriptor
+/// @return line if everythings is good,
+/// else NULL if file is finished or cannot read
 char	*get_next_line(int fd)
 {
 	static t_file_reader	buffs[1024];

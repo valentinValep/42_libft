@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:52:39 by vlepille          #+#    #+#             */
-/*   Updated: 2022/12/27 19:09:35 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:53:18 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,16 @@ char	*get_next_line(int fd)
 	if (buffs[fd].strlen == -1 && (buffs[fd].strlen--, 1))
 		free(buffs[fd].str);
 	return (res.str);
+}
+
+void	gnl_close(int fd)
+{
+	char	*res;
+
+	res = get_next_line(fd);
+	while (res)
+	{
+		free(res);
+		res = get_next_line(fd);
+	}
 }

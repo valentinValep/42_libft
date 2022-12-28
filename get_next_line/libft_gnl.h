@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/27 19:09:43 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/28 15:53:33 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "str/libft_str.h"
 
 # ifndef GNL_BUFFER_SIZE
-#  define GNL_BUFFER_SIZE 42
+#  define GNL_BUFFER_SIZE 1028
 # endif
 
 # if GNL_BUFFER_SIZE < 0
@@ -32,5 +32,6 @@ typedef struct s_file_reader
 }	t_file_reader;
 
 char	*get_next_line(int fd);
+void	gnl_close(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/27 19:10:36 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:32:27 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 
 char	*ft_strtrim(char const *s1, char const *set);
+
+int		count_word(char const *s, char c);
 
 char	**ft_split(char const *s, char c);
 

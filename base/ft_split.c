@@ -6,14 +6,14 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:46:04 by vlepille          #+#    #+#             */
-/*   Updated: 2022/12/27 19:10:40 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:32:13 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int	count_word(char const *s, char c)
+int	count_word(char const *s, char c)
 {
 	int	in_word;
 	int	count;

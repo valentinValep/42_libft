@@ -6,11 +6,12 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/20 23:39:57 by vlepille          #+#    #+#              #
-#    Updated: 2022/12/20 23:56:55 by vlepille         ###   ########.fr        #
+#    Updated: 2022/12/29 12:48:24 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC := ft_isalnum.c \
+SRC := ft_abs.c \
+	ft_isalnum.c \
 	ft_isalpha.c \
 	ft_isascii.c \
 	ft_isdigit.c \

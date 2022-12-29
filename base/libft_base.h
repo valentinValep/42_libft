@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/28 18:32:27 by vlepille         ###   ########.fr       */
+/*   Updated: 2022/12/29 12:47:58 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define LIBFT_BASE_H
 
 # include <stddef.h>
+
+int		ft_abs(double nbr);
+
+double	ft_abs_double(double nbr);
 
 int		ft_isalpha(int c);
 

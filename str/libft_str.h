@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2022/12/21 00:22:01 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:41:31 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ typedef struct s_string
 	int		malloc_size;
 }	t_string;
 
-void	ft_upscale_str(t_string *str, int size);
+int		ft_init_string(t_string *str, char *base_str);
+void	ft_upscale_string(t_string *str, int size);
+int		ft_cat_string(t_string *str, char *base_str);
+void	ft_destroy_string(t_string *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:52:39 by vlepille          #+#    #+#             */
-/*   Updated: 2022/12/28 11:53:18 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:58:53 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_line_join(t_string *res, t_file_reader *buff)
 
 	if (!buff)
 		return (1);
-	ft_upscale_str(res, res->strlen + buff->strlen + 1);
+	ft_upscale_string(res, res->strlen + buff->strlen);
 	if (!res->str)
 		return ((buff->strlen = -1, 0));
 	i = -1;

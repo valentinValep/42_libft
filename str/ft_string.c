@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 23:34:17 by vlepille          #+#    #+#             */
-/*   Updated: 2023/01/10 15:16:13 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:53:07 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_cat_string(t_string *str, char *base_str)
 	if (!str->str)
 		return (ft_init_string(str, base_str));
 	i = 0;
-	while (base_str && base_str[i]) // @TODO THINK ABOUT base_str NULL
+	while (base_str && base_str[i])
 		i++;
 	j = str->strlen;
 	str->strlen = str->strlen + i;

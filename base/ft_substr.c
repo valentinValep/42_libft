@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 04:41:55 by vlepille          #+#    #+#             */
-/*   Updated: 2022/11/19 09:56:42 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/03/17 10:45:05 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ char	*ft_substr(char const *s, unsigned int st, size_t len)
 
 	if (!res)
 		return (0);
-	res[res_len] = 0;
-	return (ft_memcpy(res, s + st, res_len));
+	return ((res[res_len] = 0, ft_memcpy(res, s + st, res_len)));
 }

@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:22:43 by vlepille          #+#    #+#             */
-/*   Updated: 2023/08/24 17:45:26 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:10:05 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,13 @@ void	print_vector(t_vector *vector, void (*print_func)(void *))
 	ft_printf("\n]\n");
 }
 
-void	join_vec(t_vector *vector, void *src, int len)
+int	join_vec(t_vector *vector, void *src, int len)
 {
 	int	i;
 
 	i = -1;
 	while (++i < len)
-		add_vec(vector, src + (i * vector->elem_size));
+		if (add_vec(vector, src + (i * vector->elem_size)))
+			return (1);
+	return (0);
 }

@@ -6,8 +6,8 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/20 23:39:57 by vlepille          #+#    #+#              #
-#    Updated: 2022/12/20 23:57:06 by vlepille         ###   ########.fr        #
+#    Updated: 2023/08/24 17:40:59 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC := ft_string.c
+SRC := ft_string.o

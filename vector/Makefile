@@ -6,11 +6,9 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/20 23:39:57 by vlepille          #+#    #+#              #
-#    Updated: 2023/08/24 17:40:50 by vlepille         ###   ########.fr        #
+#    Updated: 2023/08/24 17:40:14 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC := ft_printf.o \
-	ft_fun_conv_char.o \
-	ft_fun_conv_decimal.o \
-	ft_fun_conv_hex.o
+OBJ := vector.o \
+	vector_add.o

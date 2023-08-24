@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:33:05 by vlepille          #+#    #+#             */
-/*   Updated: 2023/08/24 17:54:56 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:17:59 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	upscale_tab(t_vector *vector, void **new_tab)
 	return (0);
 }
 
-int	add_vec(t_vector *vector, void *elem)
+int	push_vec(t_vector *vector, void *elem)
 {
 	void	*new_tab;
 	int		i;
@@ -49,7 +49,7 @@ int	add_vec(t_vector *vector, void *elem)
 	return (0);
 }
 
-int	add_vec_offset(t_vector *vector, void *elem, int offset)
+int	push_vec_offset(t_vector *vector, void *elem, int offset)
 {
 	void	*new_tab;
 	int		i;

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC := ft_printf.o \
+OBJ := ft_printf.o \
 	ft_fun_conv_char.o \
 	ft_fun_conv_decimal.o \
 	ft_fun_conv_hex.o

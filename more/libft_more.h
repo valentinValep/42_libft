@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   libft_more.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 21:19:10 by marvin            #+#    #+#             */
-/*   Updated: 2023/09/20 14:23:54 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:19:58 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LIBFT_MORE_H
+# define LIBFT_MORE_H
 
-# include "base/libft_base.h"
-# include "str/libft_str.h"
-# include "get_next_line/libft_gnl.h"
-# include "ft_printf/libft_printf.h"
-# include "vector/vector.h"
-# include "more/libft_more.h"
+// Whitespaces
+
+int	is_whitespace(char c);
+int	is_whitespace_no_newline(char c);
 
 #endif

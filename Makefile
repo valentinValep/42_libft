@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 02:24:43 by marvin            #+#    #+#              #
-#    Updated: 2023/08/24 17:42:11 by vlepille         ###   ########.fr        #
+#    Updated: 2023/09/20 14:26:48 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ STR_FILE := str
 GNL_FILE := get_next_line
 PRINTF_FILE := ft_printf
 VECTOR_FILE := vector
+MORE_FILE := more
 
-INCLUDES := -I. -I$(BASE_FILE) -I$(STR_FILE) -I$(GNL_FILE) -I$(PRINTF_FILE) -I$(VECTOR_FILE)
+INCLUDES := -I. -I$(BASE_FILE) -I$(STR_FILE) -I$(GNL_FILE) -I$(PRINTF_FILE) -I$(VECTOR_FILE) -I$(MORE_FILE)
 
 include base/Makefile
 BASE_OBJ := $(addprefix $(BASE_FILE)/, $(OBJ))
@@ -34,8 +35,10 @@ include ft_printf/Makefile
 PRINTF_OBJ := $(addprefix $(PRINTF_FILE)/, $(OBJ))
 include vector/Makefile
 VECTOR_OBJ := $(addprefix $(VECTOR_FILE)/, $(OBJ))
+include more/Makefile
+MORE_OBJ := $(addprefix $(MORE_FILE)/, $(OBJ))
 
-OBJ := $(BASE_OBJ) $(STR_OBJ) $(GNL_OBJ) $(PRINTF_OBJ) $(VECTOR_OBJ)
+OBJ := $(BASE_OBJ) $(STR_OBJ) $(GNL_OBJ) $(PRINTF_OBJ) $(VECTOR_OBJ) $(MORE_OBJ)
 
 RM := rm -f
 

@@ -6,7 +6,7 @@
 #    By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/20 23:39:57 by vlepille          #+#    #+#              #
-#    Updated: 2023/08/24 17:40:31 by vlepille         ###   ########.fr        #
+#    Updated: 2023/09/21 14:47:27 by vlepille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ OBJ := ft_abs.o \
 	ft_tolower.o \
 	ft_strchr.o \
 	ft_strrchr.o \
+	ft_strcmp.o \
 	ft_strncmp.o \
 	ft_memchr.o \
 	ft_memcmp.o \

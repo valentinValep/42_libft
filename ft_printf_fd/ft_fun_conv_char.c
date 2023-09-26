@@ -6,19 +6,19 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:17:07 by vlepille          #+#    #+#             */
-/*   Updated: 2023/09/21 14:30:33 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:59:55 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf_fd.h"
 
-void	ft_char_conv(va_list *args, t_display_buffer *buf, int fd)
+void	ft_char_conv_fd(va_list *args, t_display_buffer_fd *buf, int fd)
 {
-	ft_write_buf(fd, buf, &(char){va_arg(*args, int)}, 1);
+	ft_write_buf_fd(fd, buf, &(char){va_arg(*args, int)}, 1);
 }
 
-void	ft_string_conv(va_list *args, t_display_buffer *buf, int fd)
+void	ft_string_conv_fd(va_list *args, t_display_buffer_fd *buf, int fd)
 {
 	int		i;
 	char	*str;
@@ -26,17 +26,17 @@ void	ft_string_conv(va_list *args, t_display_buffer *buf, int fd)
 	str = (char *)va_arg(*args, char const *);
 	if (!str)
 	{
-		ft_write_buf(fd, buf, "(null)", 6);
+		ft_write_buf_fd(fd, buf, "(null)", 6);
 		return ;
 	}
 	i = -1;
 	while (str[++i])
 		;
-	ft_write_buf(fd, buf, str, i);
+	ft_write_buf_fd(fd, buf, str, i);
 }
 
-void	ft_percent_conv(va_list *args, t_display_buffer *buf, int fd)
+void	ft_percent_conv_fd(va_list *args, t_display_buffer_fd *buf, int fd)
 {
 	(void)args;
-	ft_write_buf(fd, buf, "%", 1);
+	ft_write_buf_fd(fd, buf, "%", 1);
 }

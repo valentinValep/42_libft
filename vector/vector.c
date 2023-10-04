@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:22:43 by vlepille          #+#    #+#             */
-/*   Updated: 2023/08/24 18:18:53 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:55:48 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,21 @@ void	remove_vec(t_vector *vector, int offset)
 
 void	destroy_vec(t_vector *vector)
 {
-	if (vector->msize > 0)
+	if (vector->msize != 0)
 		free(vector->tab);
+	vector->len = 0;
+	vector->msize = 0;
+	vector->tab = NULL;
 }
 
-void	print_vector(t_vector *vector, void (*print_func)(void *))
+void	destroy_vec2(t_vector *vector, void (*destroy_func)(void *))
 {
 	int	i;
 
 	i = -1;
-	ft_printf("[\n", vector->len);
 	while (++i < vector->len)
-	{
-		ft_printf("\t");
-		print_func(vector->tab + (i * vector->elem_size));
-		if (i != vector->len - 1)
-			ft_printf("\n");
-	}
-	ft_printf("\n]\n");
+		destroy_func(vector->tab + (i * vector->elem_size));
+	destroy_vec(vector);
 }
 
 int	join_vec(t_vector *vector, void *src, int len)

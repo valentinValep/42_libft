@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:28:34 by vlepille          #+#    #+#             */
-/*   Updated: 2023/09/26 17:01:11 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:57:06 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_FD_H
 
 # include <stdarg.h>
-#include <unistd.h>
+# include <unistd.h>
 
 # define CONVERSION_NUMBER 9
 # define PRINTF_BUFFER_SIZE 512
@@ -27,7 +27,8 @@ typedef struct s_display_buffer_fd {
 	int		total_length;
 }	t_display_buffer_fd;
 
-void	ft_write_buf_fd(int fd, t_display_buffer_fd *buf, char const *str, int len);
+void	ft_write_buf_fd(
+			int fd, t_display_buffer_fd *buf, char const *str, int len);
 
 typedef void	(*t_fun_conv_fd)(va_list *, t_display_buffer_fd *buf, int fd);
 

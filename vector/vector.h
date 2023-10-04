@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:17:10 by vlepille          #+#    #+#             */
-/*   Updated: 2023/08/24 18:18:03 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:39:56 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define VECTOR_H
 
 # define MALLOC_ERROR 1
+# define ALREADY_FAIL_ERROR 2
 
 typedef struct s_vector
 {
@@ -32,6 +33,7 @@ int		join_vec(t_vector *vector, void *src, int len)
 		__attribute__ ((warn_unused_result));
 void	remove_vec(t_vector *vector, int offset);
 void	destroy_vec(t_vector *vector);
+void	destroy_vec2(t_vector *vector, void (*destroy_func)(void *));
 void	print_vector(t_vector *vector, void (*print_func)(void *));
 
 #endif

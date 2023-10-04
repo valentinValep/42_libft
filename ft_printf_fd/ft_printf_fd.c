@@ -6,7 +6,7 @@
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:28:20 by vlepille          #+#    #+#             */
-/*   Updated: 2023/09/26 16:59:57 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:56:45 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include <unistd.h>
 #include "ft_printf_fd.h"
 
-static void	ft_fun_conv_fd(char c, va_list *args, t_display_buffer_fd *buf, int fd)
+static void	ft_fun_conv_fd(
+	char c, va_list *args, t_display_buffer_fd *buf, int fd)
 {
 	int					i;
 	const char			format_list[CONVERSION_NUMBER] = "cspdiuxX%";
 	t_fun_conv_fd const	fun_list[CONVERSION_NUMBER] = {&ft_char_conv_fd,
-		&ft_string_conv_fd, &ft_pointer_conv_fd, &ft_decimal_conv_fd, &ft_integer_conv_fd,
+		&ft_string_conv_fd, &ft_pointer_conv_fd,
+		&ft_decimal_conv_fd, &ft_integer_conv_fd,
 		&ft_unsigned_conv_fd, &ft_lower_hexa_conv_fd, &ft_upper_hexa_conv_fd,
 		&ft_percent_conv_fd};
 
@@ -34,7 +36,8 @@ static void	ft_fun_conv_fd(char c, va_list *args, t_display_buffer_fd *buf, int 
 	fun_list[i](args, buf, fd);
 }
 
-void	ft_write_buf_fd(int fd, t_display_buffer_fd *buf, char const *str, int len)
+void	ft_write_buf_fd(
+	int fd, t_display_buffer_fd *buf, char const *str, int len)
 {
 	int	i;
 

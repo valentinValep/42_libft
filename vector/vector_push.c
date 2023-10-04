@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_add.c                                       :+:      :+:    :+:   */
+/*   vector_push.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlepille <vlepille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:33:05 by vlepille          #+#    #+#             */
-/*   Updated: 2023/08/24 18:17:59 by vlepille         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:39:14 by vlepille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ int	upscale_tab(t_vector *vector, void **new_tab)
 {
 	int	i;
 
+	if (vector->msize == -1)
+		return (ALREADY_FAIL_ERROR);
 	vector->msize = (vector->msize << 1) + !vector->msize;
 	*new_tab = malloc(vector->msize * vector->elem_size);
 	if (!*new_tab)
+	{
+		vector->msize = -1;
 		return (MALLOC_ERROR);
+	}
 	i = -1;
 	while (++i < vector->len * vector->elem_size)
 		((char *)*new_tab)[i] = ((char *)vector->tab)[i];
